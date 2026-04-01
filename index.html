@@ -1329,23 +1329,23 @@
                 <div class="kpi-grid">
                     <div class="kpi">
                         <div class="lbl">Total em HD</div>
-                        <div class="val blue">142</div>
+                        <div class="val blue" id="dash-total">142</div>
                         <div class="sub">Joinville + região</div>
                     </div>
                     <div class="kpi">
                         <div class="lbl">Faltas este mês</div>
-                        <div class="val red">38</div>
+                        <div class="val red" id="dash-faltas">38</div>
                         <div class="sub"><span class="badge b-red">↑ 12% vs mês anterior</span></div>
                     </div>
                     <div class="kpi">
                         <div class="lbl">Pendências Transplante</div>
-                        <div class="val orange">242</div>
+                        <div class="val orange" id="dash-pend">242</div>
                         <div class="sub">Exames em atraso</div>
                     </div>
                     <div class="kpi">
                         <div class="lbl">Inscritos na Lista</div>
-                        <div class="val green">35</div>
-                        <div class="sub"><span class="badge b-orange">24,7% — meta: 30%</span></div>
+                        <div class="val green" id="dash-lista">35</div>
+                        <div class="sub" id="dash-lista-sub"><span class="badge b-orange">24,7% — meta: 30%</span></div>
                     </div>
                 </div>
 
@@ -1364,19 +1364,19 @@
                     <div style="font-size:14px;font-weight:700;margin-bottom:14px">👥 Distribuição por Perfil</div>
                     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
                         <div style="text-align:center;padding:14px;background:var(--bp);border-radius:var(--rds)">
-                            <div style="font-size:26px;font-weight:800;color:var(--b)">31</div>
+                            <div style="font-size:26px;font-weight:800;color:var(--b)" id="dash-dist-novo">31</div>
                             <div style="font-size:11px;font-weight:600;color:#1e3a8a">🆕 Recém-diag.</div>
                         </div>
                         <div style="text-align:center;padding:14px;background:var(--op);border-radius:var(--rds)">
-                            <div style="font-size:26px;font-weight:800;color:var(--o)">58</div>
+                            <div style="font-size:26px;font-weight:800;color:var(--o)" id="dash-dist-trat">58</div>
                             <div style="font-size:11px;font-weight:600;color:#78350f">💊 Em Tratamento</div>
                         </div>
                         <div style="text-align:center;padding:14px;background:var(--gp);border-radius:var(--rds)">
-                            <div style="font-size:26px;font-weight:800;color:var(--g)">18</div>
+                            <div style="font-size:26px;font-weight:800;color:var(--g)" id="dash-dist-pre">18</div>
                             <div style="font-size:11px;font-weight:600;color:#166534">⏳ Pré-transplante</div>
                         </div>
                         <div style="text-align:center;padding:14px;background:var(--pup);border-radius:var(--rds)">
-                            <div style="font-size:26px;font-weight:800;color:var(--pu)">35</div>
+                            <div style="font-size:26px;font-weight:800;color:var(--pu)" id="dash-dist-tx">35</div>
                             <div style="font-size:11px;font-weight:600;color:#5b21b6">✅ Transplantados</div>
                         </div>
                     </div>
@@ -1998,7 +1998,55 @@
         function fmtDate(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('pt-BR'); }
 
         function renderDash() {
-            const faltas = patients.filter(p => p.abs > 0).sort((a, b) => b.abs - a.abs);
+            // Utilizamos um multiplicador para simular a clínica real (fila de 100 pessoas) e geramos pacientes fictícios para a visualização no dashboard das clínicas
+            const M = 10;
+            const clinicPatients = [...patients];
+            const mockPatientsData = [
+                { name: 'Thiago Rocha', txP: Math.floor(Math.random() * 60 + 20) },
+                { name: 'Hugo Rolando', txP: Math.floor(Math.random() * 60 + 20) },
+                { name: 'Rafael Machado', txP: 27 },
+                { name: 'Rafael Gomes', txP: Math.floor(Math.random() * 60 + 20) },
+            ];
+            mockPatientsData.forEach((m, i) => {
+                clinicPatients.push({
+                    id: 101 + i, name: m.name, ini: m.name.split(' ').map(x => x[0]).join(''), profile: 'pre', grau: 5, abs: i % 3 === 0 ? 1 : 0,
+                    txP: m.txP, lc: new Date().toISOString()
+                });
+            });
+
+            document.getElementById('dash-total').textContent = clinicPatients.length * M;
+
+            const faltas = clinicPatients.filter(p => p.abs > 0).sort((a, b) => b.abs - a.abs);
+            const totalFaltas = faltas.reduce((sum, p) => sum + p.abs, 0);
+            document.getElementById('dash-faltas').textContent = totalFaltas;
+
+            let pendCount = 0;
+            clinicPatients.forEach(p => {
+                if (p.profile === 'pre') {
+                    if (p.id > 100) pendCount += Math.floor(Math.random() * 4 + 1);
+                    else {
+                        const st = clStatus[p.id] || Array(12).fill('pend');
+                        pendCount += st.filter(s => s !== 'done').length;
+                    }
+                }
+            });
+            document.getElementById('dash-pend').textContent = pendCount * M;
+
+            const txQ = clinicPatients.filter(p => p.profile === 'pre').sort((a, b) => b.txP - a.txP);
+            document.getElementById('dash-lista').textContent = txQ.length * M;
+
+            const pctLista = clinicPatients.length > 0 ? Math.round((txQ.length / clinicPatients.length) * 100) : 0;
+            const badgeClass = pctLista >= 30 ? 'b-green' : (pctLista > 15 ? 'b-orange' : 'b-red');
+            document.getElementById('dash-lista-sub').innerHTML = `<span class="badge ${badgeClass}">${pctLista}% — meta: 30%</span>`;
+
+            const dist = { novo: 0, tratamento: 0, pre: 0, tx: 0 };
+            clinicPatients.forEach(p => { if (dist[p.profile] !== undefined) dist[p.profile]++; });
+
+            document.getElementById('dash-dist-novo').textContent = dist.novo * M;
+            document.getElementById('dash-dist-trat').textContent = dist.tratamento * M;
+            document.getElementById('dash-dist-pre').textContent = dist.pre * M;
+            document.getElementById('dash-dist-tx').textContent = dist.tx * M;
+
             document.getElementById('d-faltas').innerHTML = faltas.map(p => `
     <div class="p-row">
       <div class="avatar av-md ${pfClass(p.profile)}">${p.ini}</div>
@@ -2006,7 +2054,6 @@
       <div style="font-size:11px;color:var(--g4)">${p.abs} falta(s) · Contato: ${fmtDate(p.lc)}</div></div>
       <button class="btn btn-o btn-sm" onclick="openDet(${p.id})">Ver →</button>
     </div>`).join('');
-            const txQ = patients.filter(p => p.profile === 'pre').sort((a, b) => b.txP - a.txP);
             document.getElementById('d-txqueue').innerHTML = txQ.map(p => `
     <div class="p-row">
       <div class="avatar av-md profile-pre">${p.ini}</div>
