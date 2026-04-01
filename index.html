@@ -1657,12 +1657,12 @@
             <!-- HOME -->
             <div id="p-home" class="ppage">
                 <div class="mini-cards">
-                    <div class="mini-card">
+                    <div class="mini-card" id="mc-nsess-card">
                         <div class="mc-ic">🏥</div>
                         <div class="mc-lbl">Próxima Sessão</div>
                         <div class="mc-val" id="p-nsess">—</div>
                     </div>
-                    <div class="mini-card">
+                    <div class="mini-card" id="mc-meds-card">
                         <div class="mc-ic">💊</div>
                         <div class="mc-lbl">Medicamentos</div>
                         <div class="mc-val" id="p-meds">—</div>
@@ -1928,10 +1928,10 @@
 
         const infoContent = {
             novo: [
-                { cls: 'ic-blue', title: '🫘 O que é a hemodiálise?', body: 'A hemodiálise é um tratamento que substitui parte da função dos rins. Uma máquina filtra seu sangue, removendo toxinas e o excesso de líquido. As sessões geralmente ocorrem 3 vezes por semana, com duração de 3 a 4 horas. É essencial comparecer a todas as sessões — faltar tem consequências sérias para a saúde.' },
+                { cls: 'ic-blue', title: '🫘 O que é a hemodiálise?', body: 'A hemodiálise é um tratamento que substitui parte da função dos rins. Uma máquina filtra seu sangue, removendo toxinas e o excesso de líquido.' },
                 { cls: 'ic-green', title: '🥗 Alimentação e restrições', body: 'Com a doença renal, alguns alimentos precisam ser controlados:\n• Potássio: banana, laranja, tomate (consumir com moderação)\n• Fósforo: leite, queijo, refrigerante (evitar)\n• Sódio: reduzir bastante o sal\n• Líquidos: controlar conforme orientação médica\nPeça ao nutricionista da clínica um plano personalizado.' },
                 { cls: 'ic-orange', title: '💊 Seus medicamentos', body: 'Tome todos os medicamentos nos horários certos. Não interrompa nenhum remédio sem orientação médica. Anote os nomes e horários. Em caso de dúvida, pergunte à enfermagem da clínica imediatamente. Alguns remédios como quelantes de fósforo devem ser tomados junto às refeições.' },
-                { cls: 'ic-red', title: '⚠️ Sinais de alerta — quando ir à clínica', body: 'Procure atendimento imediatamente se tiver:\n• Falta de ar ou inchaço repentino\n• Dor no peito\n• Pressão muito alta ou muito baixa\n• Febre acima de 38°C\n• Vermelhidão, dor ou saída de líquido no acesso vascular (fístula/cateter)' },
+                { cls: 'ic-red', title: '⚠️ Sinais de alerta — quando ir à clínica', body: 'Procure atendimento imediatamente se tiver:\n• Falta de ar ou inchaço repentino\n• Dor no peito\n• Pressão muito alta ou muito baixa\n• Febre acima de 38°C' },
                 { cls: 'ic-purple', title: '🧠 Saúde mental e adaptação', body: 'É completamente normal sentir ansiedade, tristeza ou dificuldade de adaptação. O tratamento muda a rotina e isso é desafiador. A equipe de psicologia da Fundação Pró-Rim está disponível. Converse sobre como você está se sentindo — cuidar da mente é parte do tratamento.' },
                 { cls: 'ic-green', title: '🏥 Sobre o transplante renal', body: 'O transplante renal pode oferecer muito mais qualidade de vida. Não é um caminho para todos, mas vale conversar com seu médico sobre elegibilidade. O processo inclui exames, avaliações e inscrição em lista de espera. Não precisa se preocupar com isso agora — foque primeiro em se adaptar ao tratamento.' },
             ],
@@ -2317,7 +2317,13 @@
             document.getElementById('p-info-banner').classList.toggle('hide', !showInfoBanner);
             document.getElementById('bt-check').classList.toggle('hide', !isPre);
             document.getElementById('bt-padr').classList.toggle('hide', !showPadrinho);
-            if (document.getElementById('p-sess-card')) document.getElementById('p-sess-card').classList.toggle('hide', isTx);
+
+            const showMeds = p.grau > 2;
+            const showNSess = p.grau > 3;
+            document.getElementById('mc-meds-card').classList.toggle('hide', !showMeds);
+            document.getElementById('mc-nsess-card').classList.toggle('hide', !showNSess);
+
+            if (document.getElementById('p-sess-card')) document.getElementById('p-sess-card').classList.toggle('hide', isTx || !showNSess);
             if (document.getElementById('bt-alim')) document.getElementById('bt-alim').classList.toggle('hide', !(isGrau5 && isTx));
 
             const sl = document.getElementById('p-sess-list');
@@ -2360,7 +2366,10 @@
         }
 
         function renderInfoSections(profile) {
-            const secs = infoContent[profile] || infoContent.novo;
+            let secs = infoContent[profile] || infoContent.novo;
+            if (curP.grau < 3) {
+                secs = secs.filter(s => s.title !== '💊 Seus medicamentos');
+            }
             document.getElementById('p-info-content').innerHTML = secs.map((s, i) => `
     <div class="info-card ${s.cls}" onclick="toggleInfo(${i})">
       <h4>${s.title}</h4>
