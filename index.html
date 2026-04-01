@@ -846,35 +846,66 @@
         }
 
         .mini-cards {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 9px;
-            margin-bottom: 11px
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px
         }
 
         .mini-card {
             background: var(--wh);
             border-radius: var(--rds);
-            padding: 13px;
-            box-shadow: var(--sh)
+            padding: 18px;
+            box-shadow: var(--sh);
+            text-align: center;
         }
 
         .mc-ic {
-            font-size: 18px;
-            margin-bottom: 5px
+            font-size: 24px;
+            margin-bottom: 8px
         }
 
         .mc-lbl {
-            font-size: 10px;
+            font-size: 13px;
             color: var(--g5);
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase
         }
 
         .mc-val {
             font-size: 15px;
             font-weight: 700;
-            margin-top: 2px
+            margin-top: 6px
+        }
+
+        .mc-list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--g1);
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: left;
+            border: 1px solid var(--g2);
+        }
+
+        .mc-btn-ok {
+            background: var(--wh);
+            color: var(--g);
+            border: 1.5px solid var(--g);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .mc-btn-ok:active {
+            transform: scale(0.95);
         }
 
         .btabs {
@@ -1251,7 +1282,7 @@
                 <button onclick="setLT('clinical',this)">Equipe Clínica</button>
             </div>
             <div id="lf-patient">
-                <div class="fg"><label>CPF</label><input type="text" id="l-cpf" placeholder="000.000.000-00"></div>
+                <div class="fg"><label>CPF</label><input type="text" id="l-cpf" placeholder="Ex: 1"></div>
                 <div class="fg"><label>Senha</label><input type="password" id="l-senha" placeholder="••••••••"></div>
             </div>
             <div id="lf-clinical" class="hide">
@@ -1639,7 +1670,7 @@
                     <div class="mini-card">
                         <div class="mc-ic">📅</div>
                         <div class="mc-lbl">Consultas</div>
-                        <div class="mc-val">2 este mês</div>
+                        <div class="mc-val" id="p-cons"></div>
                     </div>
                     <div class="mini-card">
                         <div class="mc-ic">📞</div>
@@ -1688,24 +1719,38 @@
             <!-- ALIMENTAÇÃO -->
             <div id="p-alim" class="ppage hide">
                 <h2 style="font-size:17px;font-weight:800;margin-bottom:3px">Alimentação</h2>
-                <p style="font-size:12px;color:var(--g5);margin-bottom:14px">Orientações nutricionais para transplantados</p>
-                
+                <p style="font-size:12px;color:var(--g5);margin-bottom:14px">Orientações nutricionais para
+                    transplantados</p>
+
                 <div class="info-card ic-blue" onclick="this.querySelector('.info-detail').classList.toggle('open')">
                     <h4>Cronograma Alimentar Pós-Transplante</h4>
                     <div class="hint">Toque para expandir →</div>
                     <div class="info-detail" style="white-space:pre-line">Transplante - 1º Mês (30/04/2026)
-Foco em cicatrização e segurança alimentar devido à alta dosagem de imunossupressores. É obrigatório o consumo de alimentos integralmente cozidos. Está proibida a ingestão de carnes cruas, ovos com gema mole, leite não pasteurizado e vegetais crus fora de casa. Frutas como carambola e toranja (grapefruit) são estritamente proibidas, pois inibem a ação dos medicamentos antirrejeição.
+                        Foco em cicatrização e segurança alimentar devido à alta dosagem de imunossupressores. É
+                        obrigatório o consumo de alimentos integralmente cozidos. Está proibida a ingestão de carnes
+                        cruas, ovos com gema mole, leite não pasteurizado e vegetais crus fora de casa. Frutas como
+                        carambola e toranja (grapefruit) são estritamente proibidas, pois inibem a ação dos medicamentos
+                        antirrejeição.
 
-2º e 3º Mês (31/05/2026 - 30/06/2026)
-Fase de transição. Saladas e frutas cruas com casca estão liberadas, desde que rigorosamente higienizadas com solução clorada em casa. O paciente deve iniciar o controle estrito de sódio (sal) e carboidratos simples (açúcar), visto que os corticosteroides utilizados no tratamento tendem a elevar a pressão arterial e a glicemia.
+                        2º e 3º Mês (31/05/2026 - 30/06/2026)
+                        Fase de transição. Saladas e frutas cruas com casca estão liberadas, desde que rigorosamente
+                        higienizadas com solução clorada em casa. O paciente deve iniciar o controle estrito de sódio
+                        (sal) e carboidratos simples (açúcar), visto que os corticosteroides utilizados no tratamento
+                        tendem a elevar a pressão arterial e a glicemia.
 
-A partir do 6º Mês (30/09/2026)
-Fase de manutenção. Dieta regular saudável e balanceada. A restrição hídrica da época da diálise é totalmente suspensa, devendo o paciente manter alta hidratação (salvo contraindicação médica). O consumo de bebidas alcoólicas é restrito e depende de liberação médica individual. A proibição do consumo de carambola e toranja mantém-se por toda a vida do paciente.</div>
+                        A partir do 6º Mês (30/09/2026)
+                        Fase de manutenção. Dieta regular saudável e balanceada. A restrição hídrica da época da diálise
+                        é totalmente suspensa, devendo o paciente manter alta hidratação (salvo contraindicação médica).
+                        O consumo de bebidas alcoólicas é restrito e depende de liberação médica individual. A proibição
+                        do consumo de carambola e toranja mantém-se por toda a vida do paciente.</div>
                 </div>
 
                 <div class="pt-card" style="margin-top:14px">
                     <div style="font-size:14px;font-weight:700;margin-bottom:10px">🥗 Recomendações Básicas</div>
-                    <p style="font-size:13px;color:var(--g6);line-height:1.6">Após o transplante, uma alimentação equilibrada é fundamental para evitar o ganho excessivo de peso e proteger a função do novo rim. Mantenha o controle de açúcares, reduza o sal e hidrate-se adequadamente conforme orientação da sua equipe de nutrição.</p>
+                    <p style="font-size:13px;color:var(--g6);line-height:1.6">Após o transplante, uma alimentação
+                        equilibrada é fundamental para evitar o ganho excessivo de peso e proteger a função do novo rim.
+                        Mantenha o controle de açúcares, reduza o sal e hidrate-se adequadamente conforme orientação da
+                        sua equipe de nutrição.</p>
                 </div>
             </div>
 
@@ -1752,7 +1797,8 @@ Fase de manutenção. Dieta regular saudável e balanceada. A restrição hídri
                     class="bic">✅</span>Checklist</button>
             <button class="btab hide" id="bt-padr" onclick="pPage('p-padr',this)"><span
                     class="bic">🤝</span>Padrinho</button>
-            <button class="btab hide" id="bt-alim" onclick="pPage('p-alim',this)"><span class="bic">🥗</span>Alimentação</button>
+            <button class="btab hide" id="bt-alim" onclick="pPage('p-alim',this)"><span
+                    class="bic">🥗</span>Alimentação</button>
             <button class="btab" onclick="pPage('p-notif',this)"><span class="bic">🔔</span>Avisos</button>
             <button class="btab" onclick="logout()"><span class="bic">↩️</span>Sair</button>
         </nav>
@@ -1802,43 +1848,43 @@ Fase de manutenção. Dieta regular saudável e balanceada. A restrição hídri
         // ===== DATA =====
         const patients = [
             {
-                id: 1, name: 'Ana Paula Ferreira', ini: 'AP', profile: 'novo', grau: 3, nascimento: '1985-05-12', genero: 'F', inicio_tratamento: '2026-02-15', login: 'ana.paula', senha: '123', cpf: '111.111.111-11', contato_apoio: '(47) 91111-1111', att: 88, txP: 0, lc: '2026-03-20', abs: 1, padr: false,
-                sessions: ['02/04', '07/04', '09/04'], meds: 3,
+                id: 1, name: 'Ana Paula Ferreira', ini: 'AP', profile: 'novo', grau: 3, nascimento: '1985-05-12', genero: 'F', inicio_tratamento: '2026-02-15', login: 'ana.paula', senha: '123', cpf: '1', contato_apoio: '(47) 91111-1111', att: 88, txP: 0, lc: '2026-03-20', abs: 1, padr: false,
+                sessions: ['02/04', '07/04', '09/04'], meds: [{ n: 'Renagel (Sevelamer)', t: '08:00' }, { n: 'Losartana', t: '10:00' }, { n: 'Carbonato de Cálcio', t: '12:00' }], consulta: { date: '20/04/2026 às 09:30', clinic: 'Pró-Rim - Matriz', phone: '123456' },
                 contacts: [{ date: '20/03/2026', ch: 'WhatsApp', notes: 'Orientada sobre rotina de HD e restrição hídrica', rs: 'Compareceu' }]
             },
             {
-                id: 2, name: 'Carlos Eduardo Mendes', ini: 'CE', profile: 'tratamento', grau: 4, nascimento: '1970-10-22', genero: 'M', inicio_tratamento: '2025-08-10', login: 'carlos.edu', senha: '123', cpf: '222.222.222-22', contato_apoio: '(47) 92222-2222', att: 71, txP: 0, lc: '2026-03-15', abs: 4, padr: false,
-                sessions: ['01/04', '03/04', '08/04'], meds: 5,
+                id: 2, name: 'Carlos Eduardo Mendes', ini: 'CE', profile: 'tratamento', grau: 4, nascimento: '1970-10-22', genero: 'M', inicio_tratamento: '2025-08-10', login: 'carlos.edu', senha: '123', cpf: '2', contato_apoio: '(47) 92222-2222', att: 71, txP: 0, lc: '2026-03-15', abs: 4, padr: false,
+                sessions: ['01/04', '03/04', '08/04'], meds: [{ n: 'Sevelâmer', t: '12:00' }, { n: 'Ferro', t: '14:00' }], consulta: { date: '18/04/2026 às 14:00', clinic: 'Polo Norte Pró-Rim', phone: '123456' },
                 contacts: [{ date: '15/03/2026', ch: 'Telefone', notes: 'Relatou dificuldade de transporte', rs: 'Reagendou' }, { date: '22/03/2026', ch: 'WhatsApp', notes: 'Confirmou presença', rs: 'Compareceu' }]
             },
             {
-                id: 3, name: 'Maria das Graças Silva', ini: 'MG', profile: 'pre', grau: 5, nascimento: '1965-03-30', genero: 'F', inicio_tratamento: '2024-05-20', login: 'maria.silva', senha: '123', cpf: '333.333.333-33', contato_apoio: '(47) 93333-3333', att: 94, txP: 58, lc: '2026-03-28', abs: 0, padr: true,
-                sessions: ['02/04', '04/04', '09/04'], meds: 4,
+                id: 3, name: 'Maria das Graças Silva', ini: 'MG', profile: 'pre', grau: 5, nascimento: '1965-03-30', genero: 'F', inicio_tratamento: '2024-05-20', login: 'maria.silva', senha: '123', cpf: '3', contato_apoio: '(47) 93333-3333', att: 94, txP: 58, lc: '2026-03-28', abs: 0, padr: true,
+                sessions: ['02/04', '04/04', '09/04'], meds: [{ n: 'Renagel', t: '09:00' }, { n: 'AAS', t: '10:00' }], consulta: { date: '05/05/2026 às 10:00', clinic: 'Pró-Rim Especialidades', phone: '123456' },
                 contacts: [{ date: '28/03/2026', ch: 'Presencial', notes: 'Checklist revisado. 5 exames pendentes.', rs: 'Compareceu' }]
             },
             {
-                id: 4, name: 'João Batista Oliveira', ini: 'JB', profile: 'pre', grau: 5, nascimento: '1980-07-15', genero: 'M', inicio_tratamento: '2023-11-05', login: 'joao.batista', senha: '123', cpf: '444.444.444-44', contato_apoio: '(47) 94444-4444', att: 82, txP: 75, lc: '2026-03-25', abs: 2, padr: true,
-                sessions: ['01/04', '06/04', '08/04'], meds: 6,
+                id: 4, name: 'João Batista Oliveira', ini: 'JB', profile: 'pre', grau: 5, nascimento: '1980-07-15', genero: 'M', inicio_tratamento: '2023-11-05', login: 'joao.batista', senha: '123', cpf: '4', contato_apoio: '(47) 94444-4444', att: 82, txP: 75, lc: '2026-03-25', abs: 2, padr: true,
+                sessions: ['01/04', '06/04', '08/04'], meds: [{ n: 'Carbonato de Cálcio', t: '12:00' }, { n: 'Losartana', t: '20:00' }], consulta: { date: '12/05/2026 às 08:30', clinic: 'Pró-Rim - Matriz', phone: '123456' },
                 contacts: [{ date: '25/03/2026', ch: 'WhatsApp', notes: 'Exame cardíaco agendado para abril', rs: 'Reagendou' }]
             },
             {
-                id: 5, name: 'Rosenilde Costa Souza', ini: 'RC', profile: 'tx', grau: 5, nascimento: '1990-12-05', genero: 'F', inicio_tratamento: '2022-01-15', login: 'rosenilde.costa', senha: '123', cpf: '555.555.555-55', contato_apoio: '(47) 95555-5555', att: 100, txP: 100, lc: '2026-03-29', abs: 0, padr: false,
-                sessions: [], meds: 3,
+                id: 5, name: 'Rosenilde Costa Souza', ini: 'RC', profile: 'tx', grau: 5, nascimento: '1990-12-05', genero: 'F', inicio_tratamento: '2022-01-15', login: 'rosenilde.costa', senha: '123', cpf: '5', contato_apoio: '(47) 95555-5555', att: 100, txP: 100, lc: '2026-03-29', abs: 0, padr: false,
+                sessions: [], meds: [{ n: 'Tacrolimo', t: '08:00' }, { n: 'Micofenolato', t: '08:00' }, { n: 'Prednisona', t: '10:00' }, { n: 'Tacrolimo', t: '20:00' }, { n: 'Micofenolato', t: '20:00' }], consulta: { date: '30/04/2026 às 13:45', clinic: 'Hospital Pró-Rim', phone: '123456' },
                 contacts: [{ date: '29/03/2026', ch: 'Presencial', notes: 'Retorno pós-Tx. Evolução excelente.', rs: 'Compareceu' }]
             },
             {
-                id: 6, name: 'Francisco Alves Pereira', ini: 'FA', profile: 'tratamento', grau: 4, nascimento: '1975-09-18', genero: 'M', inicio_tratamento: '2025-02-20', login: 'francisco.alves', senha: '123', cpf: '666.666.666-66', contato_apoio: '(47) 96666-6666', att: 60, txP: 0, lc: '2026-03-10', abs: 6, padr: false,
-                sessions: ['03/04', '08/04', '10/04'], meds: 4,
+                id: 6, name: 'Francisco Alves Pereira', ini: 'FA', profile: 'tratamento', grau: 4, nascimento: '1975-09-18', genero: 'M', inicio_tratamento: '2025-02-20', login: 'francisco.alves', senha: '123', cpf: '6', contato_apoio: '(47) 96666-6666', att: 60, txP: 0, lc: '2026-03-10', abs: 6, padr: false,
+                sessions: ['03/04', '08/04', '10/04'], meds: [{ n: 'Sevelâmer', t: '13:00' }, { n: 'Losartana', t: '22:00' }], consulta: { date: '11/04/2026 às 16:00', clinic: 'Pró-Rim Nefrologia', phone: '123456' },
                 contacts: [{ date: '10/03/2026', ch: 'Telefone', notes: 'Não atendeu', rs: 'Sem retorno' }]
             },
             {
-                id: 7, name: 'Tereza Cristina Borges', ini: 'TC', profile: 'novo', grau: 2, nascimento: '1982-04-25', genero: 'F', inicio_tratamento: '2026-03-10', login: 'tereza.cristina', senha: '123', cpf: '777.777.777-77', contato_apoio: '(47) 97777-7777', att: 95, txP: 0, lc: '2026-03-27', abs: 0, padr: false,
-                sessions: ['04/04', '09/04', '11/04'], meds: 2,
+                id: 7, name: 'Tereza Cristina Borges', ini: 'TC', profile: 'novo', grau: 2, nascimento: '1982-04-25', genero: 'F', inicio_tratamento: '2026-03-10', login: 'tereza.cristina', senha: '123', cpf: '7', contato_apoio: '(47) 97777-7777', att: 95, txP: 0, lc: '2026-03-27', abs: 0, padr: false,
+                sessions: ['04/04', '09/04', '11/04'], meds: [{ n: 'Eritropoetina', t: '10:00' }, { n: 'Cálcio', t: '14:00' }], consulta: { date: '25/04/2026 às 09:00', clinic: 'Pró-Rim - Matriz', phone: '123456' },
                 contacts: [{ date: '27/03/2026', ch: 'Presencial', notes: 'Primeira semana concluída. Muitas dúvidas sobre dieta.', rs: 'Compareceu' }]
             },
             {
-                id: 8, name: 'Antônio Ribeiro Nascimento', ini: 'AR', profile: 'pre', grau: 5, nascimento: '1968-11-08', genero: 'M', inicio_tratamento: '2024-09-12', login: 'antonio.ribeiro', senha: '123', cpf: '888.888.888-88', contato_apoio: '(47) 98888-8888', att: 89, txP: 42, lc: '2026-03-22', abs: 1, padr: false,
-                sessions: ['02/04', '07/04', '09/04'], meds: 5,
+                id: 8, name: 'Antônio Ribeiro Nascimento', ini: 'AR', profile: 'pre', grau: 5, nascimento: '1968-11-08', genero: 'M', inicio_tratamento: '2024-09-12', login: 'antonio.ribeiro', senha: '123', cpf: '8', contato_apoio: '(47) 98888-8888', att: 89, txP: 42, lc: '2026-03-22', abs: 1, padr: false,
+                sessions: ['02/04', '07/04', '09/04'], meds: [{ n: 'Renagel', t: '08:00' }, { n: 'Losartana', t: '12:00' }, { n: 'Eritropoetina', t: '16:00' }], consulta: { date: '08/05/2026 às 15:30', clinic: 'Pró-Rim Especialidades', phone: '123456' },
                 contacts: [{ date: '22/03/2026', ch: 'WhatsApp', notes: 'Orientado sobre exames pendentes', rs: 'Compareceu' }]
             },
         ];
@@ -1974,7 +2020,7 @@ Fase de manutenção. Dieta regular saudável e balanceada. A restrição hídri
                     alert('CPF ou Senha incorretos!');
                 }
             } else {
-                go('clinical'); 
+                go('clinical');
             }
         }
         function go(t, p = null) {
@@ -2241,19 +2287,38 @@ Fase de manutenção. Dieta regular saudável e balanceada. A restrição hídri
             const pl = { novo: '🆕 Recém-diagnosticado', tratamento: '💊 Em Tratamento', pre: '⏳ Pré-transplante', tx: '✅ Transplantado' };
             document.getElementById('p-pbadge').textContent = pl[p.profile] || '';
             document.getElementById('p-nsess').textContent = p.sessions[0] || 'A confirmar';
-            document.getElementById('p-meds').textContent = p.meds + ' ativos';
+
+            document.getElementById('p-meds').innerHTML = (p.meds || []).map(m => `
+                <div class="mc-list-item">
+                    <div><span style="display:block;color:var(--g7);font-size:14px;margin-bottom:2px">${m.n}</span><span style="font-size:11px;color:var(--g5)">🕔 ${m.t}</span></div>
+                    <button class="mc-btn-ok" onclick="this.innerHTML='✓ Feito';this.style.background='var(--g)';this.style.color='#fff';">OK</button>
+                </div>
+            `).join('');
+
+            const cDiv = document.getElementById('p-cons');
+            if (cDiv) {
+                if (p.consulta) {
+                    cDiv.innerHTML = `
+                        <div style="font-size:14px;font-weight:700;margin-top:6px;margin-bottom:2px">${p.consulta.date}</div>
+                        <div style="font-size:13px;font-weight:normal;color:var(--g6)">${p.consulta.clinic}</div>
+                        <div style="font-size:12px;font-weight:normal;color:var(--g);margin-top:2px">(📞 ${p.consulta.phone})</div>
+                    `;
+                } else {
+                    cDiv.innerHTML = `<div style="font-size:14px;font-weight:normal;color:var(--g5);margin-top:6px">Sem consultas agendadas</div>`;
+                }
+            }
             const isPre = (p.grau === 5 && p.profile === 'pre');
             const isGrau5 = (p.grau === 5);
             const isTx = (p.profile === 'tx');
             const showInfoBanner = p.profile === 'novo' || p.profile === 'tratamento';
-            
+
             document.getElementById('p-tx-card').classList.toggle('hide', !isPre);
             document.getElementById('p-info-banner').classList.toggle('hide', !showInfoBanner);
             document.getElementById('bt-check').classList.toggle('hide', !isPre);
             document.getElementById('bt-padr').classList.toggle('hide', !isGrau5);
-            if(document.getElementById('p-sess-card')) document.getElementById('p-sess-card').classList.toggle('hide', isTx);
-            if(document.getElementById('bt-alim')) document.getElementById('bt-alim').classList.toggle('hide', !(isGrau5 && isTx));
-            
+            if (document.getElementById('p-sess-card')) document.getElementById('p-sess-card').classList.toggle('hide', isTx);
+            if (document.getElementById('bt-alim')) document.getElementById('bt-alim').classList.toggle('hide', !(isGrau5 && isTx));
+
             const sl = document.getElementById('p-sess-list');
             sl.innerHTML = (p.sessions.length ? p.sessions : ['Sem sessões agendadas']).map((s, i) => `
     <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--g2)">
