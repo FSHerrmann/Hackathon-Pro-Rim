@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp - Assistente Pró-Rim</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #d1d7db;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .phone {
+            width: 100%;
+            max-width: 400px;
+            height: 90vh;
+            max-height: 800px;
+            background-color: #efeae2;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .header {
+            background-color: #008069;
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .status {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .chat-area {
+            flex: 1;
+            padding: 20px 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background-color: #efeae2;
+            background-image: radial-gradient(circle, #e6ded3 10%, transparent 10%), radial-gradient(circle, #e6ded3 10%, transparent 10%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-size: 14.5px;
+            line-height: 1.4;
+            position: relative;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+
+        .message.bot {
+            align-self: flex-start;
+            background-color: #ffffff;
+            border-top-left-radius: 0;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background-color: #d9fdd3;
+            border-top-right-radius: 0;
+        }
+
+        .footer {
+            background-color: #f0f2f5;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-box {
+            flex: 1;
+            background-color: white;
+            border-radius: 24px;
+            padding: 12px 16px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .send-btn {
+            background-color: #00a884;
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.2s;
+        }
+
+        .send-btn:hover {
+            background-color: #008f6f;
+        }
+
+        .chat-area::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .chat-area::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .typing-container {
+            background-color: #efeae2;
+            padding: 0 16px 10px 16px;
+            display: none;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .typing-text {
+            font-size: 12px;
+            color: #777;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="phone">
+        <div class="header">
+            <div class="avatar">🏥</div>
+            <div class="info">
+                <span class="name">Assistente Pró-Rim</span>
+                <span class="status">Online</span>
+            </div>
+        </div>
+
+        <div class="chat-area" id="chat">
+            <div class="message bot">Oi, tudo bem? Sou o assistente digital do pró-rim, posso te passar informações do
+                seu tratamento, sobre o que quer conversar?</div>
+        </div>
+
+        <div class="typing-container" id="typing">
+            <span class="typing-text">Assistente está digitando...</span>
+        </div>
+
+        <div class="footer">
+            <input type="text" id="userInput" class="input-box" placeholder="Mensagem" autocomplete="off">
+            <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <script>
+        const chat = document.getElementById('chat');
+        const userInput = document.getElementById('userInput');
+        const typing = document.getElementById('typing');
+
+        userInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            addMessage(text, 'user');
+            userInput.value = '';
+
+            typing.style.display = 'flex';
+            chat.scrollTop = chat.scrollHeight;
+
+            // Efeito de digitação com 1.5s
+            setTimeout(() => {
+                typing.style.display = 'none';
+                botReply(text);
+            }, 1500);
+        }
+
+        function botReply(text) {
+            let reply = '';
+
+            // Converte para minúsculas e remove acentos para garantir a busca ('agua' => 'agua', 'água' => 'agua')
+            const normalizedText = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+            const contains = (words) => words.some(w => normalizedText.includes(w));
+
+            // Novos Cenários Adicionados:
+            // 1. DÚVIDA: Odontológico
+            if (contains(['dente', 'dentista', 'odontologico'])) {
+                reply = 'Ótima pergunta! 🦷 O exame odontológico é obrigatório porque, após o transplante, você tomará remédios que baixam muito a sua imunidade (imunossupressores). Qualquer cárie ou infecção escondida na gengiva pode virar uma infecção grave e colocar o seu rim novo em risco. É para a sua segurança!';
+            }
+            // 2. DÚVIDA: Risco Cirúrgico (Coração)
+            else if (contains(['coracao', 'eletrocardiograma', 'cardiologista'])) {
+                reply = 'A cirurgia de transplante exige bastante do corpo, então precisamos ter 100% de certeza de que o seu coração está forte o suficiente para passar pela anestesia geral com tranquilidade. ❤️ Se o exame estiver pendente, fale com a assistente social para agilizar!';
+            }
+            // 3. ANGÚSTIA/NEGAÇÃO
+            else if (contains(['parar', 'cansei', 'curar', 'voltar ao normal', 'grave'])) {
+                reply = 'Eu entendo perfeitamente que a rotina da hemodiálise é exaustiva. 🫂 Mas o Grau 5 significa que seus rins pararam de filtrar o sangue, e a máquina está literalmente fazendo o trabalho deles para manter você vivo. Parar o tratamento é muito perigoso e fatal. Não desista! Você está no caminho para o transplante. Quer que eu chame a nossa equipe de psicologia para conversar com você hoje?';
+            }
+            // 4. ANSIEDADE DA FILA
+            else if (contains(['demora', 'minha vez', 'posicao', 'lugar na fila'])) {
+                reply = "A ansiedade é super normal! ⏳ Mas lembre-se: a lista de transplante não funciona por 'ordem de chegada'. Ela depende da compatibilidade genética, do seu tipo sanguíneo e da gravidade do caso, e é gerenciada pelo Sistema Nacional de Transplantes. Mantenha seus exames em dia e seu celular sempre ligado e com som!";
+            }
+            // Cenário 1: Checklist de Transplante
+            else if (contains(['exame', 'exames', 'transplante', 'fila', 'faltam'])) {
+                reply = 'Notei que você perguntou sobre seus exames para o transplante! Nós não fazemos agendamentos por aqui, mas olhando seu prontuário, vi que você tem 3 exames pendentes (Eletrocardiograma, Raio-X e Avaliação Odontológica). Por favor, procure a assistente social na sua próxima sessão de hemodiálise para te ajudar com os encaminhamentos.';
+            }
+            // Cenário 2: Dieta e Restrição Hídrica Grau 5
+            else if (contains(['dieta', 'comer', 'beber', 'agua', 'banana', 'sede', 'fome', 'alimentacao'])) {
+                reply = 'Como você está no Grau 5 em hemodiálise, o cuidado com a alimentação é vital! 🛑 Evite alimentos ricos em potássio (como banana, laranja e tomate) e controle a ingestão de líquidos para não sobrecarregar seu coração entre as sessões. Quer que eu avise a nutricionista para conversar com você amanhã?';
+            }
+            // Cenário 3: Medicação
+            else if (contains(['remedio', 'medicamento', 'tomar', 'pilula'])) {
+                reply = 'Seus remédios são fundamentais! Hoje sua prescrição indica: Renagel (junto às refeições) e Losartana (às 20h). Nunca interrompa a medicação sem falar com seu médico nefrologista, ok?';
+            }
+            // Cenário 4: Risco de Falta/Absenteísmo
+            else if (contains(['falta', 'faltar', 'nao vou', 'ir hoje', 'carona', 'transporte'])) {
+                reply = '🚨 Atenção: Faltar na hemodiálise é muito perigoso! O acúmulo de líquidos e toxinas no seu corpo pode causar falta de ar grave e até parada cardíaca. Se você está com problemas de transporte, me avise agora para eu alertar a assistência social da Pró-Rim!';
+            }
+            // Cenário 5: Emergência com Acesso Vascular
+            else if (contains(['fistula', 'cateter', 'sangrando', 'dor', 'vermelho', 'inchado'])) {
+                reply = '⚠️ SINAL DE ALERTA! Problemas no cateter ou na fístula são emergências médicas. Não espere. Dirija-se imediatamente ao pronto-atendimento do Hospital Pró-Rim ou à emergência mais próxima de você.';
+            }
+            // Cenário 6: Ajuda / Ajudar
+            else if (contains(['ajudar', 'ajuda'])) {
+                reply = 'Um assistente vai entrar em contato.';
+            }
+            // Cenário 7: Socorro / Emergência
+            else if (contains(['socorro', 'emergencia'])) {
+                reply = 'Em caso de emergência ligue para o número 192.';
+            }
+            // Cenário 8: Help / Opções
+            else if (contains(['help', 'com o que', 'como'])) {
+                reply = 'Posso te ajudar com os seguintes temas (basta digitar a palavra):\n\n' +
+                    '📋 *Fila do Transplante* (demora, fila, exames)\n' +
+                    '🦷 *Dúvidas Médicas* (dente, coração, dentista)\n' +
+                    '🥗 *Dietas/Líquidos* (beber, água, banana)\n' +
+                    '💊 *Medicação* (remédio, tomar)\n' +
+                    '🚨 *Falta na HD* (falta, transporte)\n' +
+                    '🫂 *Apoio Emocional* (cansei, parar, grave)\n' +
+                    '🏥 *Emergência* (cateter, sangrando, dor)\n\n' +
+                    'Como posso te ajudar hoje?';
+            }
+            // Cenário Padrão
+            else {
+                reply = 'Acho que não posso te ajudar com isso, digite "help" para saber como posso te ajudar por aqui ou ligue 3431-3800 para falar direto com o seu pró-rim.';
+            }
+
+            addMessage(reply, 'bot');
+        }
+
+        function addMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('message', sender);
+            msgDiv.textContent = text;
+            chat.appendChild(msgDiv);
+            chat.scrollTop = chat.scrollHeight;
+        }
+    </script>
+</body>
+
+</html>
