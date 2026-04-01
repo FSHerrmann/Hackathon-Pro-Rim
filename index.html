@@ -1269,7 +1269,6 @@
 
 <body>
 
-    <!-- ===================== LOGIN ===================== -->
     <div id="login-page">
         <div class="login-box">
             <div class="login-logo">
@@ -1282,7 +1281,12 @@
                 <button onclick="setLT('clinical',this)">Equipe Clínica</button>
             </div>
             <div id="lf-patient">
-                <div class="fg"><label>CPF</label><input type="text" id="l-cpf" placeholder="Número de 1 a 8"></div>
+                <div class="fg">
+                    <label>CPF</label>
+                    <input type="text" id="l-cpf" placeholder="Número de 1 a 6, conforme o grau do paciente">
+                    <div style="font-size: 10px; color: var(--g5); margin-top: 4px;">Dica: digite de 1 a 6 para testar
+                        pacientes</div>
+                </div>
                 <div class="fg"><label>Senha</label><input type="password" id="l-senha" placeholder="123"></div>
             </div>
             <div id="lf-clinical" class="hide">
@@ -1297,7 +1301,6 @@
         </div>
     </div>
 
-    <!-- ===================== CLINICAL APP ===================== -->
     <div id="clinical-app" class="hide">
         <nav class="sidebar">
             <div class="sb-logo">
@@ -1318,7 +1321,6 @@
         </nav>
         <main class="c-main">
 
-            <!-- DASHBOARD -->
             <div id="c-dash" class="cpage">
                 <div class="ph">
                     <h1>Dashboard</h1>
@@ -1417,7 +1419,6 @@
                 </div>
             </div>
 
-            <!-- PATIENTS -->
             <div id="c-patients" class="cpage hide">
                 <div class="ph">
                     <h1>Pacientes</h1>
@@ -1450,7 +1451,6 @@
                 </div>
             </div>
 
-            <!-- TRIAGE -->
             <div id="c-triage" class="cpage hide">
                 <div class="ph">
                     <h1>Triagem de Paciente</h1>
@@ -1549,7 +1549,6 @@
                 </div>
             </div>
 
-            <!-- ALERTS -->
             <div id="c-alerts" class="cpage hide">
                 <div class="ph">
                     <h1>Alertas</h1>
@@ -1558,7 +1557,6 @@
                 <div id="alerts-list"></div>
             </div>
 
-            <!-- PATIENT DETAIL -->
             <div id="c-detail" class="cpage hide">
                 <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px">
                     <button class="btn btn-s btn-sm" onclick="cPage('c-patients')">← Voltar</button>
@@ -1637,7 +1635,6 @@
         </main>
     </div>
 
-    <!-- ===================== PATIENT APP ===================== -->
     <div id="patient-app" class="hide">
         <div class="pt-header">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
@@ -1654,7 +1651,6 @@
         </div>
         <div class="pt-content">
 
-            <!-- HOME -->
             <div id="p-home" class="ppage">
                 <div class="mini-cards">
                     <div class="mini-card" id="mc-nsess-card">
@@ -1672,18 +1668,6 @@
                         <div class="mc-lbl">Consultas</div>
                         <div class="mc-val" id="p-cons"></div>
                     </div>
-                    <div class="mini-card">
-                        <div class="mc-ic">📞</div>
-                        <div class="mc-lbl">Contato Clínica</div>
-                        <div class="mc-val" style="font-size:11px">Disque 0800</div>
-                    </div>
-                </div>
-
-                <div id="p-info-banner" class="pt-card hide">
-                    <div class="pt-card-title">📚 Central de Informações</div>
-                    <p style="font-size:13px;color:var(--g5);margin-bottom:11px">Você tem dúvidas sobre a hemodiálise,
-                        sua dieta ou medicação? Acesse materiais preparados pela equipe.</p>
-                    <button class="btn btn-o btn-sm" onclick="pPage('p-info',null)">Dúvidas</button>
                 </div>
 
                 <div id="p-tx-card" class="pt-card hide">
@@ -1709,52 +1693,12 @@
                 </div>
             </div>
 
-            <!-- INFO HUB -->
             <div id="p-info" class="ppage hide">
                 <h2 style="font-size:17px;font-weight:800;margin-bottom:3px">Central de Informações</h2>
                 <p style="font-size:12px;color:var(--g5);margin-bottom:14px">Toque em um tópico para expandir</p>
                 <div id="p-info-content"></div>
             </div>
 
-            <!-- ALIMENTAÇÃO -->
-            <div id="p-alim" class="ppage hide">
-                <h2 style="font-size:17px;font-weight:800;margin-bottom:3px">Alimentação</h2>
-                <p style="font-size:12px;color:var(--g5);margin-bottom:14px">Orientações nutricionais para
-                    transplantados</p>
-
-                <div class="info-card ic-blue" onclick="this.querySelector('.info-detail').classList.toggle('open')">
-                    <h4>Cronograma Alimentar Pós-Transplante</h4>
-                    <div class="hint">Toque para expandir →</div>
-                    <div class="info-detail" style="white-space:pre-line">Transplante - 1º Mês (30/04/2026)
-                        Foco em cicatrização e segurança alimentar devido à alta dosagem de imunossupressores. É
-                        obrigatório o consumo de alimentos integralmente cozidos. Está proibida a ingestão de carnes
-                        cruas, ovos com gema mole, leite não pasteurizado e vegetais crus fora de casa. Frutas como
-                        carambola e toranja (grapefruit) são estritamente proibidas, pois inibem a ação dos medicamentos
-                        antirrejeição.
-
-                        2º e 3º Mês (31/05/2026 - 30/06/2026)
-                        Fase de transição. Saladas e frutas cruas com casca estão liberadas, desde que rigorosamente
-                        higienizadas com solução clorada em casa. O paciente deve iniciar o controle estrito de sódio
-                        (sal) e carboidratos simples (açúcar), visto que os corticosteroides utilizados no tratamento
-                        tendem a elevar a pressão arterial e a glicemia.
-
-                        A partir do 6º Mês (30/09/2026)
-                        Fase de manutenção. Dieta regular saudável e balanceada. A restrição hídrica da época da diálise
-                        é totalmente suspensa, devendo o paciente manter alta hidratação (salvo contraindicação médica).
-                        O consumo de bebidas alcoólicas é restrito e depende de liberação médica individual. A proibição
-                        do consumo de carambola e toranja mantém-se por toda a vida do paciente.</div>
-                </div>
-
-                <div class="pt-card" style="margin-top:14px">
-                    <div style="font-size:14px;font-weight:700;margin-bottom:10px">🥗 Recomendações Básicas</div>
-                    <p style="font-size:13px;color:var(--g6);line-height:1.6">Após o transplante, uma alimentação
-                        equilibrada é fundamental para evitar o ganho excessivo de peso e proteger a função do novo rim.
-                        Mantenha o controle de açúcares, reduza o sal e hidrate-se adequadamente conforme orientação da
-                        sua equipe de nutrição.</p>
-                </div>
-            </div>
-
-            <!-- CHECKLIST -->
             <div id="p-check" class="ppage hide">
                 <h2 style="font-size:17px;font-weight:800;margin-bottom:3px">Meu Checklist</h2>
                 <p style="font-size:12px;color:var(--g5);margin-bottom:14px">Exames e avaliações para o transplante</p>
@@ -1773,7 +1717,6 @@
                 <div id="p-cl-sections"></div>
             </div>
 
-            <!-- APADRINHAMENTO -->
             <div id="p-padr" class="ppage hide">
                 <h2 style="font-size:17px;font-weight:800;margin-bottom:3px">Apadrinhamento</h2>
                 <p style="font-size:12px;color:var(--g5);margin-bottom:14px">Suporte de quem já passou pelo transplante
@@ -1781,7 +1724,6 @@
                 <div id="p-padr-content"></div>
             </div>
 
-            <!-- NOTIFICATIONS -->
             <div id="p-notif" class="ppage hide">
                 <h2 style="font-size:17px;font-weight:800;margin-bottom:3px">Avisos e Lembretes</h2>
                 <p style="font-size:12px;color:var(--g5);margin-bottom:14px">Mensagens da equipe e lembretes do sistema
@@ -1797,14 +1739,11 @@
                     class="bic">✅</span>Checklist</button>
             <button class="btab hide" id="bt-padr" onclick="pPage('p-padr',this)"><span
                     class="bic">🤝</span>Padrinho</button>
-            <button class="btab hide" id="bt-alim" onclick="pPage('p-alim',this)"><span
-                    class="bic">🥗</span>Alimentação</button>
             <button class="btab" onclick="pPage('p-notif',this)"><span class="bic">🔔</span>Avisos</button>
             <button class="btab" onclick="logout()"><span class="bic">↩️</span>Sair</button>
         </nav>
     </div>
 
-    <!-- MODAL: Contato -->
     <div id="m-ct" class="modal-bg hide">
         <div class="modal">
             <h3>Registrar Contato</h3>
@@ -1830,7 +1769,6 @@
         </div>
     </div>
 
-    <!-- MODAL: Exame -->
     <div id="m-ex" class="modal-bg hide">
         <div class="modal">
             <h3 id="m-ex-t">Marcar exame como realizado</h3>
@@ -1848,51 +1786,39 @@
         // ===== DATA =====
         const patients = [
             {
-                id: 1, name: 'Ana Paula Ferreira', ini: 'AP', profile: 'novo', grau: 3, nascimento: '1985-05-12', genero: 'F', inicio_tratamento: '2026-02-15', login: 'ana.paula', senha: '123', cpf: '2', contato_apoio: '(47) 91111-1111', att: 88, txP: 0, lc: '2026-03-20', abs: 1, padr: false,
-                sessions: ['02/04', '07/04', '09/04'], meds: [{ n: 'Renagel (Sevelamer)', t: '08:00' }, { n: 'Losartana', t: '10:00' }, { n: 'Carbonato de Cálcio', t: '12:00' }], consulta: { date: '20/04/2026 às 09:30', clinic: 'Pró-Rim - Matriz', phone: '123456' },
-                contacts: [{ date: '20/03/2026', ch: 'WhatsApp', notes: 'Orientada sobre rotina de HD e restrição hídrica', rs: 'Compareceu' }]
-            },
-            {
-                id: 2, name: 'Carlos Eduardo Mendes', ini: 'CE', profile: 'tratamento', grau: 4, nascimento: '1970-10-22', genero: 'M', inicio_tratamento: '2025-08-10', login: 'carlos.edu', senha: '123', cpf: '3', contato_apoio: '(47) 92222-2222', att: 71, txP: 0, lc: '2026-03-15', abs: 4, padr: false,
-                sessions: ['01/04', '03/04', '08/04'], meds: [{ n: 'Sevelâmer', t: '12:00' }, { n: 'Ferro', t: '14:00' }], consulta: { date: '18/04/2026 às 14:00', clinic: 'Polo Norte Pró-Rim', phone: '123456' },
-                contacts: [{ date: '15/03/2026', ch: 'Telefone', notes: 'Relatou dificuldade de transporte', rs: 'Reagendou' }, { date: '22/03/2026', ch: 'WhatsApp', notes: 'Confirmou presença', rs: 'Compareceu' }]
-            },
-            {
-                id: 3, name: 'Maria das Graças Silva', ini: 'MG', profile: 'pre', grau: 5, nascimento: '1965-03-30', genero: 'F', inicio_tratamento: '2024-05-20', login: 'maria.silva', senha: '123', cpf: '6', contato_apoio: '(47) 93333-3333', att: 94, txP: 58, lc: '2026-03-28', abs: 0, padr: true,
-                sessions: ['02/04', '04/04', '09/04'], meds: [{ n: 'Renagel', t: '09:00' }, { n: 'AAS', t: '10:00' }], consulta: { date: '05/05/2026 às 10:00', clinic: 'Pró-Rim Especialidades', phone: '123456' },
-                contacts: [{ date: '28/03/2026', ch: 'Presencial', notes: 'Checklist revisado. 5 exames pendentes.', rs: 'Compareceu' }]
-            },
-            {
-                id: 4, name: 'João Batista Oliveira', ini: 'JB', profile: 'pre', grau: 5, nascimento: '1980-07-15', genero: 'M', inicio_tratamento: '2023-11-05', login: 'joao.batista', senha: '123', cpf: '7', contato_apoio: '(47) 94444-4444', att: 82, txP: 75, lc: '2026-03-25', abs: 2, padr: true,
-                sessions: ['01/04', '06/04', '08/04'], meds: [{ n: 'Carbonato de Cálcio', t: '12:00' }, { n: 'Losartana', t: '20:00' }], consulta: { date: '12/05/2026 às 08:30', clinic: 'Pró-Rim - Matriz', phone: '123456' },
-                contacts: [{ date: '25/03/2026', ch: 'WhatsApp', notes: 'Exame cardíaco agendado para abril', rs: 'Reagendou' }]
-            },
-            {
-                id: 5, name: 'Rosenilde Costa Souza', ini: 'RC', profile: 'tx', grau: 5, nascimento: '1990-12-05', genero: 'F', inicio_tratamento: '2022-01-15', login: 'rosenilde.costa', senha: '123', cpf: '8', contato_apoio: '(47) 95555-5555', att: 100, txP: 100, lc: '2026-03-29', abs: 0, padr: false,
-                sessions: [], meds: [{ n: 'Tacrolimo', t: '08:00' }, { n: 'Micofenolato', t: '08:00' }, { n: 'Prednisona', t: '10:00' }, { n: 'Tacrolimo', t: '20:00' }, { n: 'Micofenolato', t: '20:00' }], consulta: { date: '30/04/2026 às 13:45', clinic: 'Hospital Pró-Rim', phone: '123456' },
-                contacts: [{ date: '29/03/2026', ch: 'Presencial', notes: 'Retorno pós-Tx. Evolução excelente.', rs: 'Compareceu' }]
-            },
-            {
-                id: 6, name: 'Francisco Alves Pereira', ini: 'FA', profile: 'tratamento', grau: 4, nascimento: '1975-09-18', genero: 'M', inicio_tratamento: '2025-02-20', login: 'francisco.alves', senha: '123', cpf: '4', contato_apoio: '(47) 96666-6666', att: 60, txP: 0, lc: '2026-03-10', abs: 6, padr: false,
-                sessions: ['03/04', '08/04', '10/04'], meds: [{ n: 'Sevelâmer', t: '13:00' }, { n: 'Losartana', t: '22:00' }], consulta: { date: '11/04/2026 às 16:00', clinic: 'Pró-Rim Nefrologia', phone: '123456' },
-                contacts: [{ date: '10/03/2026', ch: 'Telefone', notes: 'Não atendeu', rs: 'Sem retorno' }]
-            },
-            {
-                id: 7, name: 'Tereza Cristina Borges', ini: 'TC', profile: 'novo', grau: 2, nascimento: '1982-04-25', genero: 'F', inicio_tratamento: '2026-03-10', login: 'tereza.cristina', senha: '123', cpf: '1', contato_apoio: '(47) 97777-7777', att: 95, txP: 0, lc: '2026-03-27', abs: 0, padr: false,
-                sessions: ['04/04', '09/04', '11/04'], meds: [{ n: 'Eritropoetina', t: '10:00' }, { n: 'Cálcio', t: '14:00' }], consulta: { date: '25/04/2026 às 09:00', clinic: 'Pró-Rim - Matriz', phone: '123456' },
+                id: 1, name: 'Tereza Cristina Borges', ini: 'TC', profile: 'novo', grau: 1, nascimento: '1982-04-25', genero: 'F', inicio_tratamento: '2026-03-10', login: 'tereza.cristina', senha: '123', cpf: '1', contato_apoio: '(47) 97777-7777', att: 95, txP: 0, lc: '2026-03-27', abs: 0, padr: false,
+                sessions: [], meds: [{ n: 'Eritropoetina', t: '10:00' }, { n: 'Cálcio', t: '14:00' }], consulta: { date: '25/04/2026 às 09:00', clinic: 'Pró-Rim - Matriz', phone: '123456' },
                 contacts: [{ date: '27/03/2026', ch: 'Presencial', notes: 'Primeira semana concluída. Muitas dúvidas sobre dieta.', rs: 'Compareceu' }]
             },
             {
-                id: 8, name: 'Antônio Ribeiro Nascimento', ini: 'AR', profile: 'pre', grau: 5, nascimento: '1968-11-08', genero: 'M', inicio_tratamento: '2024-09-12', login: 'antonio.ribeiro', senha: '123', cpf: '5', contato_apoio: '(47) 98888-8888', att: 89, txP: 42, lc: '2026-03-22', abs: 1, padr: false,
+                id: 2, name: 'Ana Paula Ferreira', ini: 'AP', profile: 'novo', grau: 2, nascimento: '1985-05-12', genero: 'F', inicio_tratamento: '2026-02-15', login: 'ana.paula', senha: '123', cpf: '2', contato_apoio: '(47) 91111-1111', att: 88, txP: 0, lc: '2026-03-20', abs: 1, padr: false,
+                sessions: [], meds: [{ n: 'Renagel (Sevelamer)', t: '08:00' }, { n: 'Losartana', t: '10:00' }, { n: 'Carbonato de Cálcio', t: '12:00' }], consulta: { date: '20/04/2026 às 09:30', clinic: 'Pró-Rim - Matriz', phone: '123456' },
+                contacts: [{ date: '20/03/2026', ch: 'WhatsApp', notes: 'Orientada sobre rotina de HD e restrição hídrica', rs: 'Compareceu' }]
+            },
+            {
+                id: 3, name: 'Carlos Eduardo Mendes', ini: 'CE', profile: 'novo', grau: 3, nascimento: '1970-10-22', genero: 'M', inicio_tratamento: '2025-08-10', login: 'carlos.edu', senha: '123', cpf: '3', contato_apoio: '(47) 92222-2222', att: 71, txP: 0, lc: '2026-03-15', abs: 4, padr: false,
+                sessions: [], meds: [{ n: 'Sevelâmer', t: '12:00' }, { n: 'Ferro', t: '14:00' }], consulta: { date: '18/04/2026 às 14:00', clinic: 'Polo Norte Pró-Rim', phone: '123456' },
+                contacts: [{ date: '15/03/2026', ch: 'Telefone', notes: 'Relatou dificuldade de transporte', rs: 'Reagendou' }, { date: '22/03/2026', ch: 'WhatsApp', notes: 'Confirmou presença', rs: 'Compareceu' }]
+            },
+            {
+                id: 4, name: 'Francisco Alves Pereira', ini: 'FA', profile: 'tratamento', grau: 4, nascimento: '1975-09-18', genero: 'M', inicio_tratamento: '2025-02-20', login: 'francisco.alves', senha: '123', cpf: '4', contato_apoio: '(47) 96666-6666', att: 60, txP: 0, lc: '2026-03-10', abs: 6, padr: false,
+                sessions: [], meds: [{ n: 'Sevelâmer', t: '13:00' }, { n: 'Losartana', t: '22:00' }], consulta: { date: '11/04/2026 às 16:00', clinic: 'Pró-Rim Nefrologia', phone: '123456' },
+                contacts: [{ date: '10/03/2026', ch: 'Telefone', notes: 'Não atendeu', rs: 'Sem retorno' }]
+            },
+            {
+                id: 5, name: 'Antônio Ribeiro Nascimento', ini: 'AR', profile: 'pre', grau: 5, nascimento: '1968-11-08', genero: 'M', inicio_tratamento: '2024-09-12', login: 'antonio.ribeiro', senha: '123', cpf: '5', contato_apoio: '(47) 98888-8888', att: 89, txP: 42, lc: '2026-03-22', abs: 1, padr: false,
                 sessions: ['02/04', '07/04', '09/04'], meds: [{ n: 'Renagel', t: '08:00' }, { n: 'Losartana', t: '12:00' }, { n: 'Eritropoetina', t: '16:00' }], consulta: { date: '08/05/2026 às 15:30', clinic: 'Pró-Rim Especialidades', phone: '123456' },
                 contacts: [{ date: '22/03/2026', ch: 'WhatsApp', notes: 'Orientado sobre exames pendentes', rs: 'Compareceu' }]
             },
+            {
+                id: 6, name: 'Rosenilde Costa Souza', ini: 'RC', profile: 'tx', grau: 5, nascimento: '1990-12-05', genero: 'F', inicio_tratamento: '2022-01-15', login: 'rosenilde.costa', senha: '123', cpf: '6', contato_apoio: '(47) 95555-5555', att: 100, txP: 100, lc: '2026-03-29', abs: 0, padr: false,
+                sessions: [], meds: [{ n: 'Tacrolimo', t: '08:00' }, { n: 'Micofenolato', t: '08:00' }, { n: 'Prednisona', t: '10:00' }, { n: 'Tacrolimo', t: '20:00' }, { n: 'Micofenolato', t: '20:00' }], consulta: { date: '30/04/2026 às 13:45', clinic: 'Hospital Pró-Rim', phone: '123456' },
+                contacts: [{ date: '29/03/2026', ch: 'Presencial', notes: 'Retorno pós-Tx. Evolução excelente.', rs: 'Compareceu' }]
+            }
         ];
 
         const clStatus = {
-            3: ['done', 'done', 'done', 'done', 'done', 'done', 'done', 'pend', 'pend', 'done', 'pend', 'pend'],
-            4: ['done', 'done', 'done', 'done', 'done', 'done', 'done', 'done', 'done', 'done', 'pend', 'pend'],
-            8: ['done', 'done', 'pend', 'done', 'done', 'pend', 'pend', 'pend', 'pend', 'done', 'pend', 'pend'],
+            5: ['done', 'done', 'pend', 'done', 'done', 'pend', 'pend', 'pend', 'pend', 'done', 'pend', 'pend'],
         };
 
         const clItems = [
@@ -1927,44 +1853,35 @@
         ];
 
         const infoContent = {
-            novo: [
-                { cls: 'ic-blue', title: '🫘 O que é a hemodiálise?', body: 'A hemodiálise é um tratamento que substitui parte da função dos rins. Uma máquina filtra seu sangue, removendo toxinas e o excesso de líquido.' },
-                { cls: 'ic-green', title: '🥗 Alimentação e restrições', body: 'Com a doença renal, alguns alimentos precisam ser controlados:\n• Potássio: banana, laranja, tomate (consumir com moderação)\n• Fósforo: leite, queijo, refrigerante (evitar)\n• Sódio: reduzir bastante o sal\n• Líquidos: controlar conforme orientação médica\nPeça ao nutricionista da clínica um plano personalizado.' },
-                { cls: 'ic-orange', title: '💊 Seus medicamentos', body: 'Tome todos os medicamentos nos horários certos. Não interrompa nenhum remédio sem orientação médica. Anote os nomes e horários. Em caso de dúvida, pergunte à enfermagem da clínica imediatamente. Alguns remédios como quelantes de fósforo devem ser tomados junto às refeições.' },
-                { cls: 'ic-red', title: '⚠️ Sinais de alerta — quando ir à clínica', body: 'Procure atendimento imediatamente se tiver:\n• Falta de ar ou inchaço repentino\n• Dor no peito\n• Pressão muito alta ou muito baixa\n• Febre acima de 38°C' },
-                { cls: 'ic-purple', title: '🧠 Saúde mental e adaptação', body: 'É completamente normal sentir ansiedade, tristeza ou dificuldade de adaptação. O tratamento muda a rotina e isso é desafiador. A equipe de psicologia da Fundação Pró-Rim está disponível. Converse sobre como você está se sentindo — cuidar da mente é parte do tratamento.' },
-                { cls: 'ic-green', title: '🏥 Sobre o transplante renal', body: 'O transplante renal pode oferecer muito mais qualidade de vida. Não é um caminho para todos, mas vale conversar com seu médico sobre elegibilidade. O processo inclui exames, avaliações e inscrição em lista de espera. Não precisa se preocupar com isso agora — foque primeiro em se adaptar ao tratamento.' },
+            grau1: [
+                { cls: 'ic-blue', title: '🎯 Objetivo da Dieta: Prevenção', body: 'Nesta fase, seus rins funcionam bem. O objetivo é proteger os "filtros" do rim controlando o que causa lesão: pressão alta e diabetes.\n\n✅ O QUE COMER:\n• Alimentação natural: frutas frescas, legumes, verduras e grãos integrais.\n• Água: beba normalmente conforme sua sede.\n\n🚫 O QUE EVITAR:\n• Sal em excesso: é o maior inimigo da pressão. Retire o saleiro da mesa.\n• Açúcar refinado: doces e refrigerantes, especialmente se for diabético.\n• Ultraprocessados: macarrão instantâneo, temperos em cubo, biscoitos recheados.' },
+                { cls: 'ic-red', title: '🥩 Proteínas: Consumo Normal', body: 'No Grau 1, não há necessidade de cortar carnes ou ovos. No entanto, evite o "excesso" (como dietas exclusivas de proteína para academia ou uso indiscriminado de Whey Protein sem orientação), pois muita proteína aumenta o trabalho de filtração dos rins de forma desnecessária.' }
             ],
-            tratamento: [
-                { cls: 'ic-red', title: '📅 Por que não faltar às sessões?', body: 'Cada sessão é vital. A hemodiálise remove toxinas e líquidos que se acumulam no seu corpo entre as sessões. Faltar causa: falta de ar, inchaço, pressão alta, risco de infarto e internação. Se não puder comparecer, avise a clínica com antecedência para reagendar. A falta não planejada é um risco grave.' },
-                { cls: 'ic-blue', title: '🫀 Cuidado com o acesso vascular', body: 'Sua fístula ou cateter é seu maior aliado no tratamento. Cuide bem:\n• Mantenha limpo e seco\n• Não carregue peso com o braço da fístula\n• Não deixe tirar pressão ou sangue nesse braço\n• Reporte qualquer dor, vermelhidão ou inchaço imediatamente\nO acesso vascular leva meses para ser construído — proteja-o.' },
-                { cls: 'ic-green', title: '🥗 Ajuste fino da alimentação', body: 'Após meses em HD, o controle alimentar fica mais preciso. Dica prática: pese-se diariamente. Ganho de mais de 2kg entre sessões indica excesso de líquido — perigoso para o coração. Converse com o nutricionista da clínica sobre um plano atualizado à sua rotina.' },
-                { cls: 'ic-orange', title: '🔄 Fadiga e qualidade de vida', body: 'Cansaço é comum em pacientes de HD. Dicas: desca após as sessões, pratique atividade física leve (caminhada), mantenha uma rotina de sono regular. Informe a equipe médica se o cansaço piorou — pode indicar anemia ou outros problemas tratáveis.' },
-                { cls: 'ic-purple', title: '🏥 Você pode se candidatar ao transplante', body: 'O transplante renal oferece sobrevida muito maior do que a HD a longo prazo. Se você está em HD há mais de 6 meses, converse com seu médico sobre elegibilidade. O processo de avaliação pode levar meses — quanto antes começar, melhor. Pergunte sobre o checklist de exames.' },
+            grau2: [
+                { cls: 'ic-blue', title: '⚖️ Objetivo da Dieta: Frear o Desgaste', body: 'A perda de função renal é leve. O foco total da alimentação é estabilizar a doença.\n\n✅ O QUE COMER:\n• Carnes brancas e magras (frango, peixe).\n• Azeite de oliva extra virgem e gorduras boas.\n• Carboidratos complexos (batata doce, arroz integral).\n\n🚫 O QUE EVITAR:\n• Embutidos: salsicha, presunto, peito de peru, mortadela, salame (são bombas de sódio e conservantes que agridem o rim).\n• Fast food e frituras de imersão.' },
+                { cls: 'ic-orange', title: '🧂 O Esquadrão Anti-Sal', body: 'No Grau 2, seus rins já começam a ter uma leve dificuldade para eliminar o excesso de sódio. \n\nDica Prática:\n• Substitua o sal comum por ervas naturais (orégano, manjericão, alecrim, alho, cebola, açafrão).\n• Cuidado com os "falsos saudáveis" como molho shoyu e peito de peru, que escondem quantidades absurdas de sal.' }
             ],
-            pre: [
-                { cls: 'ic-blue', title: '🏥 Como funciona a lista de transplante', body: 'A lista de espera é gerenciada pelo Sistema Nacional de Transplantes (SNT). Sua posição depende de tipo sanguíneo, compatibilidade, tempo de espera e urgência clínica. Para ser inscrito, você precisa completar todos os exames e avaliações. Acompanhe seu progresso no Checklist desta plataforma.' },
-                { cls: 'ic-green', title: '📋 Os exames são necessários — entenda por quê', body: 'Cada exame existe por uma razão:\n• Radiografia/ECG: garantir que seu coração suportará a cirurgia\n• Sorologias: protocolo obrigatório de segurança\n• Avaliação psicológica: preparar você emocionalmente\n• Odontológica: infecções dentárias podem provocar rejeição do órgão\nNenhum exame é burocracia — todos protegem você.' },
-                { cls: 'ic-orange', title: '😰 Medos sobre o transplante — é normal', body: 'Medo da cirurgia, da rejeição, de infecções — são reações normais. Saiba que:\n• Taxas de sucesso do Tx renal são superiores a 90% em 1 ano\n• A equipe acompanha cada etapa\n• Seu padrinho viveu isso e pode responder dúvidas reais\n• A HD a longo prazo tem riscos maiores do que o transplante\nConverse abertamente com a equipe.' },
-                { cls: 'ic-purple', title: '💊 Após o transplante — o que esperar', body: 'Após o Tx, você precisará tomar imunossupressores para evitar rejeição. São medicamentos diários pelo resto da vida — mas permitem uma vida muito mais plena. A maioria dos pacientes transplantados retorna ao trabalho, viagens e rotina normal em poucos meses.' },
-                { cls: 'ic-red', title: '⏰ Tempo importa — não adie exames', body: 'Quanto mais tempo você demora para completar o checklist, mais tempo fica na fila com a saúde se deteriorando. Cada exame pendente é um obstáculo à sua inscrição na lista. Se tiver dificuldade logística (transporte, agendamento), converse com a assistente social da clínica — ela pode ajudar.' },
+            grau3: [
+                { cls: 'ic-orange', title: '📉 A Grande Mudança: Proteínas', body: 'No Grau 3, os rins começam a falhar ao limpar a "ureia" (o lixo da digestão das carnes).\n\n🚫 O QUE DIMINUIR:\n• Carnes vermelhas, frango e ovos. Você NÃO deve parar de comer, mas as porções devem ser reduzidas (geralmente do tamanho da palma da sua mão).\n\n✅ COMO SUBSTITUIR:\n• Para não passar fome, aumente o consumo de vegetais e carboidratos saudáveis sob orientação do nutricionista.' },
+                { cls: 'ic-purple', title: '🦴 Alerta: Fósforo e Ossos', body: 'Seus rins agora têm dificuldade de eliminar o Fósforo. Quando ele acumula no sangue, rouba o cálcio dos seus ossos, deixando-os fracos, e causa coceiras terríveis na pele.\n\n🚫 O QUE EVITAR:\n• Refrigerantes escuros (à base de cola).\n• Excesso de queijos amarelos e laticínios.\n• Miúdos (fígado, coração, moela).\n• Sardinha em lata e gema de ovo em excesso.' }
+            ],
+            grau4: [
+                { cls: 'ic-red', title: '🚨 Proteção Máxima (Pré-Diálise)', body: 'Fase crítica para adiar a ida para a máquina de hemodiálise. A restrição alimentar é rigorosa para não sobrecarregar os 15% a 30% de rim que ainda funcionam.\n\n🚫 O QUE EVITAR A TODO CUSTO:\n• Restrição severa de proteínas animais.\n• Salgados de festa, caldos concentrados, sopas de pacote.\n• Início do controle de potássio (caso seus exames de sangue mostrem potássio alto).\n\n✅ O QUE COMER:\n• Siga a dieta do seu nutricionista renal. O foco é manter a energia alta com carboidratos limpos e pouquíssima proteína.' },
+                { cls: 'ic-blue', title: '☠️ A Fruta Fatal: Carambola', body: 'ALERTA MÁXIMO: A carambola possui uma toxina (caramboxina) que é eliminada pelo rim saudável. No Grau 4 em diante, essa toxina não sai do corpo, vai para o cérebro e causa soluços incontroláveis, convulsões e pode levar ao coma e à morte. \n\n🚫 NUNCA MAIS COMA CARAMBOLA OU TOME SEU SUCO.' }
+            ],
+            grau5: [
+                { cls: 'ic-blue', title: '🔄 Inversão da Dieta (Hemodiálise)', body: 'Na máquina de HD, a dieta muda completamente! Como a máquina "lava" seu sangue, ela acaba levando nutrientes embora.\n\n✅ O QUE AUMENTAR:\n• Proteína! Você agora PRECISA comer mais carnes e ovos (principalmente a clara) para não ficar desnutrido e perder massa muscular. O que era proibido no Grau 4, agora é obrigatório.' },
+                { cls: 'ic-red', title: '💧 Restrição Severa de Líquidos', body: 'Como você não urina, a água não tem para onde ir. Ela incha seu corpo, vai para o pulmão (falta de ar) e força o coração.\n\n🚫 O QUE CONTROLAR:\n• A cota diária é rigorosa (geralmente 500ml a 800ml POR DIA).\n• Isso inclui: água, café, chás, gelatina, sopas, feijão com muito caldo e frutas ricas em água (melancia, melão, laranja).\n• Dica: Beba água em copos pequenos e chupe gelo se a sede apertar.' },
+                { cls: 'ic-purple', title: '🍌 O Perigo Silencioso: Potássio', body: 'O potássio acumula no sangue entre uma sessão e outra de diálise. Em excesso, ele causa fraqueza muscular e PARADA CARDÍACA súbita.\n\n🚫 O QUE EVITAR:\n• Banana, laranja, melão, abacate, uva, água de coco.\n• Tomate, batata, mandioca, feijão.\n• Chocolate e amendoim.\n\n✅ TRUQUE PARA COZINHAR:\nDescasque as batatas/mandioca, pique e ferva em muita água. Jogue essa água fora e cozinhe de novo. Isso retira mais da metade do potássio!' },
+                { cls: 'ic-orange', title: '🦴 Fósforo e Quelantes', body: 'A máquina de HD não consegue limpar bem o Fósforo do sangue. \n\n🚫 EVITE:\n• Leite, queijos, iogurtes, refrigerante cola, amendoim, salsicha.\n\n💊 SEU REMÉDIO (QUELANTE):\nSeu médico receitará remédios como o Sevelâmer ou Carbonato de Cálcio. Eles devem ser tomados JUNTO com as refeições (na primeira ou segunda garfada). Eles funcionam como uma "esponja" que gruda no fósforo da comida e o elimina nas fezes.' }
             ],
             tx: [
-                { cls: 'ic-green', title: '✅ Parabéns — cuide do seu novo rim', body: 'O transplante foi um recomeço. Para proteger o órgão: tome os imunossupressores todos os dias nos horários certos, evite exposição a doenças infecciosas, faça os retornos regulares. O novo rim pode durar décadas com cuidado adequado.' },
-                { cls: 'ic-red', title: '⚠️ Sinais de rejeição — reconheça cedo', body: 'Procure atendimento imediatamente se notar: dor ou inchaço onde o rim foi implantado, febre, urina diminuindo muito, cansaço extremo, pressão alta subitamente. A rejeição tratada cedo pode ser revertida — não espere.' },
-                { cls: 'ic-blue', title: '💊 Imunossupressores — por que nunca parar', body: 'Os imunossupressores ensinam seu sistema imune a tolerar o novo rim. Parar sem orientação médica causa rejeição — que pode levar à perda do órgão e retorno à HD. Mesmo se sentindo bem, nunca interrompa. Em caso de efeitos colaterais insuportáveis, converse com o médico para ajustar a dose.' },
-                { cls: 'ic-purple', title: '🤝 Seja um padrinho', body: 'Sua experiência é extremamente valiosa. Pacientes em preparo para o transplante têm medos que só quem passou pode entender. O programa de apadrinhamento da Fundação Pró-Rim conecta você com quem precisa de suporte. Converse com a equipe sobre como participar.' },
-            ],
+                { cls: 'ic-green', title: '🎉 A Liberdade: Água e Potássio', body: 'Com o rim novo funcionando, a fase de sobrevivência acabou!\n\n✅ O QUE ESTÁ LIBERADO:\n• Beba água à vontade! A hidratação agora é crucial para o rim novo.\n• Pode voltar a comer banana, tomate, feijão com caldo e frutas sem medo do potássio e do fósforo.\n• A restrição de líquidos da época da diálise está suspensa.' },
+                { cls: 'ic-red', title: '🦠 Cuidado Máximo: Imunidade e Higiene', body: 'Para o seu corpo não rejeitar o rim, você toma remédios que deixam sua imunidade baixíssima. Uma intoxicação alimentar agora é um risco grave de internação.\n\n🚫 O QUE É PROIBIDO (Risco de Bactérias):\n• Carnes mal passadas ou cruas (sushi, carpaccio).\n• Ovo com gema mole ou maionese caseira.\n• Queijos não pasteurizados (queijo minas frescal de feira).\n• Saladas e vegetais crus fora de casa (restaurantes).\n\n✅ EM CASA: Lave as folhas e frutas com solução clorada (hipoclorito) rigorosamente.' },
+                { cls: 'ic-blue', title: '💊 Interação com Remédios (Proibidos)', body: 'Duas frutas interagem violentamente com os imunossupressores (Tacrolimo/Ciclosporina), cortando o efeito deles ou intoxicando seu corpo.\n\n🚫 PROIBIDO PARA SEMPRE:\n• Toranja (Grapefruit).\n• Carambola (continua proibida pelo risco neurológico e interação).' },
+                { cls: 'ic-orange', title: '⚖️ Cuidado a Longo Prazo: Corticoides', body: 'Os remédios antirrejeição (especialmente corticoides) costumam aumentar muito o apetite, elevar a glicose (risco de diabetes pós-transplante) e a pressão arterial.\n\n🚫 O QUE CONTROLAR:\n• Cuidado redobrado com doces, pães e massas para não ganhar muito peso e não desenvolver diabetes.\n• Mantenha o sal sob controle para proteger o rim novo da pressão alta.' }
+            ]
         };
-
-        const alertsData = [
-            { pr: 'alta', title: 'Francisco Alves Pereira — 6 faltas em 30 dias', desc: 'Maior absenteísmo da carteira. Último contato em 10/03 sem retorno. Risco clínico iminente.' },
-            { pr: 'alta', title: '242 pacientes com exames de imagem pendentes', desc: 'Joinville: Rx Tórax (231), US Abdominal (230), ECG (230). Bloqueia inscrição na lista de transplante.' },
-            { pr: 'alta', title: 'João Batista — Eletrocardiograma vencido há 45 dias', desc: 'Exame vencido prejudica manutenção na lista de transplante. Reagendar com urgência.' },
-            { pr: 'media', title: 'Antônio Ribeiro — 7 meses em preparo, 42% do checklist', desc: 'Lento progresso pode indicar barreiras de acesso ou medo. Acionar equipe multidisciplinar.' },
-            { pr: 'media', title: 'Carlos Eduardo — 4 faltas. Relato: dificuldade de transporte', desc: 'Verificar assistência social para apoio logístico. Risco de abandono do tratamento.' },
-            { pr: 'media', title: 'Taxa de inscrição na lista: 24,7% (abaixo dos 30% exigidos)', desc: 'Meta regulatória não cumprida. Ativar protocolo Acelerador de Esperança para pacientes elegíveis.' },
-        ];
 
         const trFields = {
             novo: `<div class="fg"><label>Data de início da hemodiálise</label><input type="date"></div>
@@ -2033,7 +1950,7 @@
                         gsap.fromTo('.c-main', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5, delay: 0.1, ease: 'power2.out' });
                     }
                     else {
-                        show('patient-app'); initPatient(p || patients[2]);
+                        show('patient-app'); initPatient(p || patients[4]); // Padrao id 5 (Antonio Grau 5) para demonstracao
                         gsap.fromTo('#patient-app', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' });
                     }
                 }
@@ -2108,7 +2025,7 @@
             document.getElementById('pt-tbody').innerHTML = data.map(p => `
     <tr>
       <td><div style="display:flex;align-items:center;gap:9px"><div class="avatar av-sm ${pfClass(p.profile)}">${p.ini}</div><strong>${p.name}</strong></div></td>
-      <td>${pbadge(p.profile)}</td>
+      <td>${pbadge(p.profile)} <div style="font-size:10px;color:var(--g5);margin-top:2px">Grau ${p.grau}</div></td>
       <td>
         <div style="display:flex;align-items:center;gap:7px">
           <div class="pb-wrap" style="width:70px"><div class="pb-fill ${p.att < 75 ? 'red' : p.att < 90 ? 'orange' : ''}" style="width:${p.att}%"></div></div>
@@ -2198,12 +2115,13 @@
         }
 
         function renderDetInfo() {
-            const mats = infoContent[curP.profile] || [];
+            let chaves = curP.profile === 'tx' ? 'tx' : 'grau' + curP.grau;
+            const mats = infoContent[chaves] || [];
             document.getElementById('det-info-list').innerHTML = mats.map((m, i) => `
     <div class="toggle-row" style="align-items:flex-start;gap:12px">
       <div style="flex:1">
         <div style="font-size:13px;font-weight:600">${m.title}</div>
-        <div style="font-size:11px;color:var(--g5);margin-top:2px">Material educativo para ${pfLabel(curP.profile).replace(/^[^\s]+\s/, '')}</div>
+        <div style="font-size:11px;color:var(--g5);margin-top:2px">Material educativo para Grau ${curP.grau}</div>
       </div>
       <label class="tog"><input type="checkbox"><span class="tog-sl"></span></label>
     </div>`).join('');
@@ -2308,23 +2226,19 @@
                 }
             }
             const isPre = (p.grau === 5 && p.profile === 'pre');
-            const isGrau5 = (p.grau === 5);
-            const showPadrinho = (p.grau >= 4);
+            const showPadrinho = p.grau >= 4;
             const isTx = (p.profile === 'tx');
-            const showInfoBanner = p.profile === 'novo' || p.profile === 'tratamento';
 
             document.getElementById('p-tx-card').classList.toggle('hide', !isPre);
-            document.getElementById('p-info-banner').classList.toggle('hide', !showInfoBanner);
             document.getElementById('bt-check').classList.toggle('hide', !isPre);
             document.getElementById('bt-padr').classList.toggle('hide', !showPadrinho);
 
-            const showMeds = p.grau > 2;
-            const showNSess = p.grau > 3;
+            const showMeds = p.grau >= 2;
+            const showNSess = (p.grau >= 5 && !isTx);
             document.getElementById('mc-meds-card').classList.toggle('hide', !showMeds);
             document.getElementById('mc-nsess-card').classList.toggle('hide', !showNSess);
 
             if (document.getElementById('p-sess-card')) document.getElementById('p-sess-card').classList.toggle('hide', isTx || !showNSess);
-            if (document.getElementById('bt-alim')) document.getElementById('bt-alim').classList.toggle('hide', !(isGrau5 && isTx));
 
             const sl = document.getElementById('p-sess-list');
             sl.innerHTML = (p.sessions.length ? p.sessions : ['Sem sessões agendadas']).map((s, i) => `
@@ -2354,9 +2268,12 @@
       </div>`).join('');
                 renderPCL(p);
             }
-            renderInfoSections(p.profile);
+            renderInfoSections(p);
             renderPadr(p);
             renderNotif(p);
+
+            // Reset navigation to the "Início" page on login
+            pPage('p-home', document.querySelector('#btabs .btab:first-child'));
         }
 
         function setRing(rid, tid, pct) {
@@ -2365,11 +2282,9 @@
             document.getElementById(tid).textContent = pct + '%';
         }
 
-        function renderInfoSections(profile) {
-            let secs = infoContent[profile] || infoContent.novo;
-            if (curP.grau < 3) {
-                secs = secs.filter(s => s.title !== '💊 Seus medicamentos');
-            }
+        function renderInfoSections(p) {
+            let chaves = p.profile === 'tx' ? 'tx' : 'grau' + p.grau;
+            let secs = infoContent[chaves] || [];
             document.getElementById('p-info-content').innerHTML = secs.map((s, i) => `
     <div class="info-card ${s.cls}" onclick="toggleInfo(${i})">
       <h4>${s.title}</h4>
@@ -2416,32 +2331,48 @@
       <p style="font-size:13px;color:var(--g6);line-height:1.65;margin-bottom:18px">A sua jornada de transplante é uma verdadeira inspiração. Ajude ativamente outros pacientes que aguardam na fila compartilhando suas experiências, acalmando ansiedades e encorajando a permanência no tratamento e obediência à dieta.</p>
       <button class="btn btn-p">Quero ser Padrinho</button>
     </div>`;
-            } else if (p.padr) {
+            } else if (p.grau >= 4) {
                 c.innerHTML = `<div class="pt-card" style="text-align:center">
       <div class="padr-av">👤</div>
       <div style="font-size:17px;font-weight:700;color:var(--g)">Rosenilde C.</div>
       <div style="font-size:12px;color:var(--g5);margin-top:3px">Transplantada há 2 anos</div>
-      <button class="btn btn-p" style="margin-top:14px">💬 Enviar Mensagem</button>
-      <div class="padr-story"><strong>História de Rosenilde:</strong><br><br>
+      <button class="btn btn-p" style="margin-top:14px">💬 Entrar em Contato</button>
+      <div class="padr-story"><strong>História da sua Padrinha:</strong><br><br>
       "Fiquei 3 anos em hemodiálise antes do transplante. O medo era enorme — da cirurgia, da rejeição, de tudo. Mas com o apoio da equipe e informações certas, completei todos os exames. Hoje tenho uma vida muito mais plena e quero te ajudar a chegar até aqui. Você consegue!"</div>
     </div>`;
             } else {
                 c.innerHTML = `<div class="pt-card" style="text-align:center;padding:28px 18px">
-      <div style="font-size:44px;margin-bottom:13px">🤝</div>
-      <h3 style="font-size:17px;font-weight:700;color:var(--g);margin-bottom:8px">Em breve você terá um padrinho!</h3>
-      <p style="font-size:13px;color:var(--g5);line-height:1.65">Você será apadrinhado por alguém que já passou pelo transplante e quer te ajudar nessa jornada. Essa pessoa pode responder dúvidas que só quem viveu o processo sabe responder.</p>
+      <div style="font-size:44px;margin-bottom:13px">🩺</div>
+      <h3 style="font-size:17px;font-weight:700;color:var(--g);margin-bottom:8px">Programa Pró-Rim</h3>
+      <p style="font-size:13px;color:var(--g6);line-height:1.65;margin-bottom:18px">Como seu acompanhamento está nos graus iniciais (1 a 3), seu tratamento no momento é focado em proteger sua função renal. A hemodiálise costuma iniciar a partir do grau 5.</p>
+      <p style="font-size:13px;color:var(--g5);line-height:1.65">Nos estágios mais avançados (graus 4 e 5), o nosso <strong>Programa de Apadrinhamento</strong> será ativado para você. Nele, você receberá apoio de uma pessoa que já realizou o transplante e poderá esclarecer dúvidas sobre a cirurgia, o tratamento e a fila de espera!</p>
     </div>`;
             }
         }
 
         function renderNotif(p) {
-            const ns = [
-                { t: 'ni-warn', ic: '🗓️', title: `Próxima sessão de HD: ${p.sessions[0] || 'A confirmar'}`, time: 'Hoje' },
-                { t: 'ni-info', ic: '💊', title: 'Lembrete: tome seus medicamentos no horário certo', time: 'Diário' },
-                { t: 'ni-warn', ic: '📋', title: 'Você tem itens pendentes. Acesse a Central de Informações.', time: 'Importante' },
-                { t: 'ni-ok', ic: '✅', title: 'Equipe: parabéns pela aderência este mês!', time: 'Semana passada' },
-                { t: 'ni-info', ic: '📞', title: 'A clínica tentou contato. Retorne pelo WhatsApp da Fundação.', time: '2 dias atrás' },
-            ];
+            const ns = [];
+            if (p.grau >= 5 && p.profile !== 'tx') {
+                ns.push({ t: 'ni-warn', ic: '🗓️', title: `Próxima sessão de HD: ${p.sessions[0] || 'A confirmar'}`, time: 'Hoje' });
+            }
+            if (p.meds && p.meds.length > 0) {
+                ns.push({ t: 'ni-info', ic: '💊', title: 'Lembrete: tome seus medicamentos no horário certo', time: 'Diário' });
+            } else {
+                ns.push({ t: 'ni-info', ic: '🥗', title: 'Mantenha sua dieta em dia para proteger seus rins!', time: 'Diário' });
+            }
+            if (p.profile === 'pre') {
+                ns.push({ t: 'ni-warn', ic: '📋', title: 'Você tem exames pendentes. Acesse o seu Checklist!', time: 'Importante' });
+            }
+            if (p.profile === 'tx') {
+                ns.push({ t: 'ni-ok', ic: '🎉', title: 'Lembrete: realize seus exames de rotina no prazo pós-transplante.', time: 'Importante' });
+            }
+            if (p.att && p.att >= 90) {
+                ns.push({ t: 'ni-ok', ic: '✅', title: 'Equipe: parabéns pela aderência este mês!', time: 'Semana passada' });
+            } else if (p.abs > 0) {
+                ns.push({ t: 'ni-warn', ic: '⚠️', title: 'Atenção: A constância no tratamento é fundamental.', time: 'Importante' });
+            }
+            ns.push({ t: 'ni-info', ic: '📞', title: 'A clínica tentou contato. Retorne pelo WhatsApp da Fundação.', time: '2 dias atrás' });
+
             document.getElementById('p-notif-list').innerHTML = ns.map(n => `
     <div class="notif-item ${n.t}">
       <span class="notif-ic">${n.ic}</span>
