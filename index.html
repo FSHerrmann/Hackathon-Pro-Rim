@@ -2309,13 +2309,14 @@
             }
             const isPre = (p.grau === 5 && p.profile === 'pre');
             const isGrau5 = (p.grau === 5);
+            const showPadrinho = (p.grau >= 4);
             const isTx = (p.profile === 'tx');
             const showInfoBanner = p.profile === 'novo' || p.profile === 'tratamento';
 
             document.getElementById('p-tx-card').classList.toggle('hide', !isPre);
             document.getElementById('p-info-banner').classList.toggle('hide', !showInfoBanner);
             document.getElementById('bt-check').classList.toggle('hide', !isPre);
-            document.getElementById('bt-padr').classList.toggle('hide', !isGrau5);
+            document.getElementById('bt-padr').classList.toggle('hide', !showPadrinho);
             if (document.getElementById('p-sess-card')) document.getElementById('p-sess-card').classList.toggle('hide', isTx);
             if (document.getElementById('bt-alim')) document.getElementById('bt-alim').classList.toggle('hide', !(isGrau5 && isTx));
 
