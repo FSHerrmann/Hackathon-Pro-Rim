@@ -1282,7 +1282,7 @@
                 <button onclick="setLT('clinical',this)">Equipe Clínica</button>
             </div>
             <div id="lf-patient">
-                <div class="fg"><label>CPF</label><input type="text" id="l-cpf" placeholder="Número de 1 a 9"></div>
+                <div class="fg"><label>CPF</label><input type="text" id="l-cpf" placeholder="Número de 1 a 8"></div>
                 <div class="fg"><label>Senha</label><input type="password" id="l-senha" placeholder="123"></div>
             </div>
             <div id="lf-clinical" class="hide">
@@ -1848,12 +1848,12 @@
         // ===== DATA =====
         const patients = [
             {
-                id: 1, name: 'Ana Paula Ferreira', ini: 'AP', profile: 'novo', grau: 3, nascimento: '1985-05-12', genero: 'F', inicio_tratamento: '2026-02-15', login: 'ana.paula', senha: '123', cpf: '3', contato_apoio: '(47) 91111-1111', att: 88, txP: 0, lc: '2026-03-20', abs: 1, padr: false,
+                id: 1, name: 'Ana Paula Ferreira', ini: 'AP', profile: 'novo', grau: 3, nascimento: '1985-05-12', genero: 'F', inicio_tratamento: '2026-02-15', login: 'ana.paula', senha: '123', cpf: '2', contato_apoio: '(47) 91111-1111', att: 88, txP: 0, lc: '2026-03-20', abs: 1, padr: false,
                 sessions: ['02/04', '07/04', '09/04'], meds: [{ n: 'Renagel (Sevelamer)', t: '08:00' }, { n: 'Losartana', t: '10:00' }, { n: 'Carbonato de Cálcio', t: '12:00' }], consulta: { date: '20/04/2026 às 09:30', clinic: 'Pró-Rim - Matriz', phone: '123456' },
                 contacts: [{ date: '20/03/2026', ch: 'WhatsApp', notes: 'Orientada sobre rotina de HD e restrição hídrica', rs: 'Compareceu' }]
             },
             {
-                id: 2, name: 'Carlos Eduardo Mendes', ini: 'CE', profile: 'tratamento', grau: 4, nascimento: '1970-10-22', genero: 'M', inicio_tratamento: '2025-08-10', login: 'carlos.edu', senha: '123', cpf: '4', contato_apoio: '(47) 92222-2222', att: 71, txP: 0, lc: '2026-03-15', abs: 4, padr: false,
+                id: 2, name: 'Carlos Eduardo Mendes', ini: 'CE', profile: 'tratamento', grau: 4, nascimento: '1970-10-22', genero: 'M', inicio_tratamento: '2025-08-10', login: 'carlos.edu', senha: '123', cpf: '3', contato_apoio: '(47) 92222-2222', att: 71, txP: 0, lc: '2026-03-15', abs: 4, padr: false,
                 sessions: ['01/04', '03/04', '08/04'], meds: [{ n: 'Sevelâmer', t: '12:00' }, { n: 'Ferro', t: '14:00' }], consulta: { date: '18/04/2026 às 14:00', clinic: 'Polo Norte Pró-Rim', phone: '123456' },
                 contacts: [{ date: '15/03/2026', ch: 'Telefone', notes: 'Relatou dificuldade de transporte', rs: 'Reagendou' }, { date: '22/03/2026', ch: 'WhatsApp', notes: 'Confirmou presença', rs: 'Compareceu' }]
             },
@@ -1868,22 +1868,22 @@
                 contacts: [{ date: '25/03/2026', ch: 'WhatsApp', notes: 'Exame cardíaco agendado para abril', rs: 'Reagendou' }]
             },
             {
-                id: 5, name: 'Rosenilde Costa Souza', ini: 'RC', profile: 'tx', grau: 5, nascimento: '1990-12-05', genero: 'F', inicio_tratamento: '2022-01-15', login: 'rosenilde.costa', senha: '123', cpf: '9', contato_apoio: '(47) 95555-5555', att: 100, txP: 100, lc: '2026-03-29', abs: 0, padr: false,
+                id: 5, name: 'Rosenilde Costa Souza', ini: 'RC', profile: 'tx', grau: 5, nascimento: '1990-12-05', genero: 'F', inicio_tratamento: '2022-01-15', login: 'rosenilde.costa', senha: '123', cpf: '8', contato_apoio: '(47) 95555-5555', att: 100, txP: 100, lc: '2026-03-29', abs: 0, padr: false,
                 sessions: [], meds: [{ n: 'Tacrolimo', t: '08:00' }, { n: 'Micofenolato', t: '08:00' }, { n: 'Prednisona', t: '10:00' }, { n: 'Tacrolimo', t: '20:00' }, { n: 'Micofenolato', t: '20:00' }], consulta: { date: '30/04/2026 às 13:45', clinic: 'Hospital Pró-Rim', phone: '123456' },
                 contacts: [{ date: '29/03/2026', ch: 'Presencial', notes: 'Retorno pós-Tx. Evolução excelente.', rs: 'Compareceu' }]
             },
             {
-                id: 6, name: 'Francisco Alves Pereira', ini: 'FA', profile: 'tratamento', grau: 4, nascimento: '1975-09-18', genero: 'M', inicio_tratamento: '2025-02-20', login: 'francisco.alves', senha: '123', cpf: '5', contato_apoio: '(47) 96666-6666', att: 60, txP: 0, lc: '2026-03-10', abs: 6, padr: false,
+                id: 6, name: 'Francisco Alves Pereira', ini: 'FA', profile: 'tratamento', grau: 4, nascimento: '1975-09-18', genero: 'M', inicio_tratamento: '2025-02-20', login: 'francisco.alves', senha: '123', cpf: '4', contato_apoio: '(47) 96666-6666', att: 60, txP: 0, lc: '2026-03-10', abs: 6, padr: false,
                 sessions: ['03/04', '08/04', '10/04'], meds: [{ n: 'Sevelâmer', t: '13:00' }, { n: 'Losartana', t: '22:00' }], consulta: { date: '11/04/2026 às 16:00', clinic: 'Pró-Rim Nefrologia', phone: '123456' },
                 contacts: [{ date: '10/03/2026', ch: 'Telefone', notes: 'Não atendeu', rs: 'Sem retorno' }]
             },
             {
-                id: 7, name: 'Tereza Cristina Borges', ini: 'TC', profile: 'novo', grau: 2, nascimento: '1982-04-25', genero: 'F', inicio_tratamento: '2026-03-10', login: 'tereza.cristina', senha: '123', cpf: '2', contato_apoio: '(47) 97777-7777', att: 95, txP: 0, lc: '2026-03-27', abs: 0, padr: false,
+                id: 7, name: 'Tereza Cristina Borges', ini: 'TC', profile: 'novo', grau: 2, nascimento: '1982-04-25', genero: 'F', inicio_tratamento: '2026-03-10', login: 'tereza.cristina', senha: '123', cpf: '1', contato_apoio: '(47) 97777-7777', att: 95, txP: 0, lc: '2026-03-27', abs: 0, padr: false,
                 sessions: ['04/04', '09/04', '11/04'], meds: [{ n: 'Eritropoetina', t: '10:00' }, { n: 'Cálcio', t: '14:00' }], consulta: { date: '25/04/2026 às 09:00', clinic: 'Pró-Rim - Matriz', phone: '123456' },
                 contacts: [{ date: '27/03/2026', ch: 'Presencial', notes: 'Primeira semana concluída. Muitas dúvidas sobre dieta.', rs: 'Compareceu' }]
             },
             {
-                id: 8, name: 'Antônio Ribeiro Nascimento', ini: 'AR', profile: 'pre', grau: 5, nascimento: '1968-11-08', genero: 'M', inicio_tratamento: '2024-09-12', login: 'antonio.ribeiro', senha: '123', cpf: '8', contato_apoio: '(47) 98888-8888', att: 89, txP: 42, lc: '2026-03-22', abs: 1, padr: false,
+                id: 8, name: 'Antônio Ribeiro Nascimento', ini: 'AR', profile: 'pre', grau: 5, nascimento: '1968-11-08', genero: 'M', inicio_tratamento: '2024-09-12', login: 'antonio.ribeiro', senha: '123', cpf: '5', contato_apoio: '(47) 98888-8888', att: 89, txP: 42, lc: '2026-03-22', abs: 1, padr: false,
                 sessions: ['02/04', '07/04', '09/04'], meds: [{ n: 'Renagel', t: '08:00' }, { n: 'Losartana', t: '12:00' }, { n: 'Eritropoetina', t: '16:00' }], consulta: { date: '08/05/2026 às 15:30', clinic: 'Pró-Rim Especialidades', phone: '123456' },
                 contacts: [{ date: '22/03/2026', ch: 'WhatsApp', notes: 'Orientado sobre exames pendentes', rs: 'Compareceu' }]
             },
@@ -2402,7 +2402,7 @@
             if (p.profile === 'tx') {
                 c.innerHTML = `<div class="pt-card" style="text-align:center;padding:28px 18px">
       <div style="font-size:44px;margin-bottom:13px">🌟</div>
-      <h3 style="font-size:17px;font-weight:700;color:var(--g);margin-bottom:8px">Torne-se um Padrinho Mágico!</h3>
+      <h3 style="font-size:17px;font-weight:700;color:var(--g);margin-bottom:8px">Torne-se um Padrinho!</h3>
       <p style="font-size:13px;color:var(--g6);line-height:1.65;margin-bottom:18px">A sua jornada de transplante é uma verdadeira inspiração. Ajude ativamente outros pacientes que aguardam na fila compartilhando suas experiências, acalmando ansiedades e encorajando a permanência no tratamento e obediência à dieta.</p>
       <button class="btn btn-p">Quero ser Padrinho</button>
     </div>`;
