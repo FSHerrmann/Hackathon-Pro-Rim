@@ -1787,12 +1787,12 @@
         const patients = [
             {
                 id: 1, name: 'Tereza Cristina Borges', ini: 'TC', profile: 'novo', grau: 1, nascimento: '1982-04-25', genero: 'F', inicio_tratamento: '2026-03-10', login: 'tereza.cristina', senha: '123', cpf: '1', contato_apoio: '(47) 97777-7777', att: 95, txP: 0, lc: '2026-03-27', abs: 0, padr: false,
-                sessions: [], meds: [{ n: 'Eritropoetina', t: '10:00' }, { n: 'Cálcio', t: '14:00' }], consulta: { date: '25/04/2026 às 09:00', clinic: 'Pró-Rim - Matriz', phone: '123456' },
+                sessions: [], meds: [], consulta: { date: '25/04/2026 às 09:00', clinic: 'Pró-Rim - Matriz', phone: '123456' },
                 contacts: [{ date: '27/03/2026', ch: 'Presencial', notes: 'Primeira semana concluída. Muitas dúvidas sobre dieta.', rs: 'Compareceu' }]
             },
             {
                 id: 2, name: 'Ana Paula Ferreira', ini: 'AP', profile: 'novo', grau: 2, nascimento: '1985-05-12', genero: 'F', inicio_tratamento: '2026-02-15', login: 'ana.paula', senha: '123', cpf: '2', contato_apoio: '(47) 91111-1111', att: 88, txP: 0, lc: '2026-03-20', abs: 1, padr: false,
-                sessions: [], meds: [{ n: 'Renagel (Sevelamer)', t: '08:00' }, { n: 'Losartana', t: '10:00' }, { n: 'Carbonato de Cálcio', t: '12:00' }], consulta: { date: '20/04/2026 às 09:30', clinic: 'Pró-Rim - Matriz', phone: '123456' },
+                sessions: [], meds: [], consulta: { date: '20/04/2026 às 09:30', clinic: 'Pró-Rim - Matriz', phone: '123456' },
                 contacts: [{ date: '20/03/2026', ch: 'WhatsApp', notes: 'Orientada sobre rotina de HD e restrição hídrica', rs: 'Compareceu' }]
             },
             {
@@ -1855,11 +1855,13 @@
         const infoContent = {
             grau1: [
                 { cls: 'ic-blue', title: '🎯 Objetivo da Dieta: Prevenção', body: 'Nesta fase, seus rins funcionam bem. O objetivo é proteger os "filtros" do rim controlando o que causa lesão: pressão alta e diabetes.\n\n✅ O QUE COMER:\n• Alimentação natural: frutas frescas, legumes, verduras e grãos integrais.\n• Água: beba normalmente conforme sua sede.\n\n🚫 O QUE EVITAR:\n• Sal em excesso: é o maior inimigo da pressão. Retire o saleiro da mesa.\n• Açúcar refinado: doces e refrigerantes, especialmente se for diabético.\n• Ultraprocessados: macarrão instantâneo, temperos em cubo, biscoitos recheados.' },
-                { cls: 'ic-red', title: '🥩 Proteínas: Consumo Normal', body: 'No Grau 1, não há necessidade de cortar carnes ou ovos. No entanto, evite o "excesso" (como dietas exclusivas de proteína para academia ou uso indiscriminado de Whey Protein sem orientação), pois muita proteína aumenta o trabalho de filtração dos rins de forma desnecessária.' }
+                { cls: 'ic-red', title: '🥩 Proteínas: Consumo Normal', body: 'No Grau 1, não há necessidade de cortar carnes ou ovos. No entanto, evite o "excesso" (como dietas exclusivas de proteína para academia ou uso indiscriminado de Whey Protein sem orientação), pois muita proteína aumenta o trabalho de filtração dos rins de forma desnecessária.'},
+                { cls: 'ic-red', title: '🏃 Exercícios Físicos: Mantenha-se Ativo', body: 'No Grau 1, a prática regular de atividades físicas é totalmente recomendada. No entanto, evite o "excesso" (como treinos exaustivos de altíssima intensidade sem orientação profissional ou sem a hidratação adequada), pois o esforço físico extremo e a desidratação podem sobrecarregar os rins de forma desnecessária.' }
             ],
             grau2: [
                 { cls: 'ic-blue', title: '⚖️ Objetivo da Dieta: Frear o Desgaste', body: 'A perda de função renal é leve. O foco total da alimentação é estabilizar a doença.\n\n✅ O QUE COMER:\n• Carnes brancas e magras (frango, peixe).\n• Azeite de oliva extra virgem e gorduras boas.\n• Carboidratos complexos (batata doce, arroz integral).\n\n🚫 O QUE EVITAR:\n• Embutidos: salsicha, presunto, peito de peru, mortadela, salame (são bombas de sódio e conservantes que agridem o rim).\n• Fast food e frituras de imersão.' },
-                { cls: 'ic-orange', title: '🧂 O Esquadrão Anti-Sal', body: 'No Grau 2, seus rins já começam a ter uma leve dificuldade para eliminar o excesso de sódio. \n\nDica Prática:\n• Substitua o sal comum por ervas naturais (orégano, manjericão, alecrim, alho, cebola, açafrão).\n• Cuidado com os "falsos saudáveis" como molho shoyu e peito de peru, que escondem quantidades absurdas de sal.' }
+                { cls: 'ic-orange', title: '🧂 O Esquadrão Anti-Sal', body: 'No Grau 2, seus rins já começam a ter uma leve dificuldade para eliminar o excesso de sódio. \n\nDica Prática:\n• Substitua o sal comum por ervas naturais (orégano, manjericão, alecrim, alho, cebola, açafrão).\n• Cuidado com os "falsos saudáveis" como molho shoyu e peito de peru, que escondem quantidades absurdas de sal.' },
+                { cls: 'ic-red', title: '🏃 Exercícios Físicos: Mantenha-se Ativo', body: 'No Grau 2, a prática regular de atividades físicas é totalmente recomendada. No entanto, evite o "excesso" (como treinos exaustivos de altíssima intensidade sem orientação profissional ou sem a hidratação adequada), pois o esforço físico extremo e a desidratação podem sobrecarregar os rins de forma desnecessária.' }
             ],
             grau3: [
                 { cls: 'ic-orange', title: '📉 A Grande Mudança: Proteínas', body: 'No Grau 3, os rins começam a falhar ao limpar a "ureia" (o lixo da digestão das carnes).\n\n🚫 O QUE DIMINUIR:\n• Carnes vermelhas, frango e ovos. Você NÃO deve parar de comer, mas as porções devem ser reduzidas (geralmente do tamanho da palma da sua mão).\n\n✅ COMO SUBSTITUIR:\n• Para não passar fome, aumente o consumo de vegetais e carboidratos saudáveis sob orientação do nutricionista.' },
@@ -2280,7 +2282,7 @@
             document.getElementById('bt-check').classList.toggle('hide', !isPre);
             document.getElementById('bt-padr').classList.toggle('hide', !showPadrinho);
 
-            const showMeds = p.grau >= 2;
+            const showMeds = p.grau >= 3;
             const showNSess = (p.grau >= 5 && !isTx);
             document.getElementById('mc-meds-card').classList.toggle('hide', !showMeds);
             document.getElementById('mc-nsess-card').classList.toggle('hide', !showNSess);
